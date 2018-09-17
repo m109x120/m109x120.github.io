@@ -43,7 +43,7 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="" class="js-avatar">
+			<img src="/assets/img/avatar.jpg" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">John Doe</a></h1>
@@ -101,7 +101,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="" class="js-avatar">
+				<img src="/assets/img/avatar.jpg" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author">John Doe</h1>
@@ -159,7 +159,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/14/hello-world/">Hello World</a>
+      <a class="article-title" href="/2018/09/14/hello-world/">搭建一个基于github和hexo的博客</a>
     </h1>
   
 
@@ -172,16 +172,36 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
+        <p>这是我的第一篇博客，我只想用它来记录我的学习路程，之前项目遇见问题，我会查别人的博客，我意识到了分享的重要性，于是开始将我的写作放到网络上来。如果有不对的地方，希望大家多多批评指正</p>
+<h2 id="首先"><a href="#首先" class="headerlink" title="首先"></a>首先</h2><p>你需要安装git和node环境，假如你安装了node，npm是默认安装的。</p>
+<h2 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h2><p>接下来，你可以检查一下你是否安装了hexo。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo -v</span><br></pre></td></tr></table></figure>
+<p>如果没有输出版本号，接着在终端执行下面语句</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm i hexo -g</span><br></pre></td></tr></table></figure>
+<h2 id="创建git仓库"><a href="#创建git仓库" class="headerlink" title="创建git仓库"></a>创建git仓库</h2><p>登陆你的git账号，建立一个仓库，这个仓库名字必须是 <code>用户名.github.io</code>,并且一个github账号只能注册一个博客地址。</p>
+<h2 id="创建本地博客文件夹"><a href="#创建本地博客文件夹" class="headerlink" title="创建本地博客文件夹"></a>创建本地博客文件夹</h2><p>在你喜欢的任何地方创建一个文件夹，用来创建本地博客，打开终端，cd到这个文件夹，初始化hexo，即执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init</span><br></pre></td></tr></table></figure>
+<p>这个过程有可能会报安装依赖失败的error，我在win10上没有遇见，在mac上遇见了，此时安装依赖，即执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+<p>初始化完成之后，你就可以在本地预览你的博客了，启动服务器，s是server的意思，即执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo s</span><br></pre></td></tr></table></figure>
+<p>在本地浏览器地址栏输入<code>http://localhost:4000/</code>可以本地预览你的作品。不过可能看起来似乎有点low。但后期是可以更改主题的。</p>
+<h3 id="将本地博客推送至远程git仓库"><a href="#将本地博客推送至远程git仓库" class="headerlink" title="将本地博客推送至远程git仓库"></a>将本地博客推送至远程git仓库</h3><p>找到本地博客文件夹，根目录的_config.yml，拉到最后修改一个配置，注意冒号后有一个空格，每个键名前是两个空格。末尾不要留下空格</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  branch: master</span><br><span class="line">  repository: https://github.com/m109x120/m109x120.github.io.git</span><br></pre></td></tr></table></figure>
+<p>开始准备上传</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g</span><br></pre></td></tr></table></figure>
+<p>上传</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
+<p>我在此处出错了，执行下面命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm i hexo-deployer-git</span><br></pre></td></tr></table></figure>
+<p>下载完依赖之后再次执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
+<p>上传成功，在浏览器上访问<code>你的用户名.github.io</code>,就可以访问了</p>
+<h3 id="如何增加博客？"><a href="#如何增加博客？" class="headerlink" title="如何增加博客？"></a>如何增加博客？</h3><p>在你博客文件夹下运行终端，创建一篇文章</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new 文章名字</span><br></pre></td></tr></table></figure>
+<p>找到根目录下的source/_posts文件夹，你刚创建的博客md文档就出现了，你就可以在这里编写你的博客了，写好之后你预览了没问题就可以上传</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g </span><br><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
+<h2 id="如何删除博？"><a href="#如何删除博？" class="headerlink" title="如何删除博？"></a>如何删除博？</h2><h2 id="如何修改博客？"><a href="#如何修改博客？" class="headerlink" title="如何修改博客？"></a>如何修改博客？</h2><h2 id="修改主题"><a href="#修改主题" class="headerlink" title="修改主题"></a>修改主题</h2><h2 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h2>
       
 
       
@@ -395,7 +415,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">多啦A梦告诉大雄:&lt;br&gt;你总是这样轻言放弃,&lt;br&gt;到最后只是在原地踏步~</div>
   	  	
     	</section>
     
