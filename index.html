@@ -210,14 +210,17 @@
 </li>
 <li><p>2.获取github的IP地址：终端 <code>ping 用户名.github.io</code>记录下IP地址，这个IP是要和你的域名绑定的。</p>
 </li>
-<li><p>3.我是在阿里云购买的域名，登录&gt;控制台&gt;域名&gt;解析&gt;添加记录</p>
-<p><img src="/Users/yangmengxia/Desktop/hahh.png" alt="hahh"></p>
-<p>CNAME记录值是你的<code>用户名.github.io</code></p>
-<p>A对应的记录值是你刚才ping到的IP地址</p>
+<li><p>3.我是在阿里云购买的域名，登录&gt;控制台&gt;域名&gt;解析&gt;添加记录<img src="/Users/yangmengxia/myblog/public/assets/blog/20180914/DNSconfig.png" alt="DNSconfig"></p>
+<ul>
+<li><p>CNAME记录值是你的<code>用户名.github.io</code></p>
+</li>
+<li><p>A对应的记录值是你刚才ping到的IP地址</p>
+</li>
+</ul>
 </li>
 <li><p>4.根目录下的&gt;_config.yml修改<code>skip_render: CNAME</code></p>
 </li>
-<li><p>5.在你的本地的文件夹根目录&gt;source下创建一个没有后缀的，名为CNAME的文件，里面写上你的域名，之后<code>hexo -g</code>and <code>hexo -d</code> 之后大功告成。试试用你的域名访问你的博客吧！</p>
+<li><p>5.在你的本地的文件夹根目录&gt;source下创建一个没有后缀的，名为CNAME的文件，里面写上你的域名，注意写错了报404，之后<code>hexo -g</code>and <code>hexo -d</code> 之后大功告成。试试用你的域名访问你的博客吧！</p>
 </li>
 </ul>
 

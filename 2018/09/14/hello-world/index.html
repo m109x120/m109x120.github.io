@@ -15,12 +15,12 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="这是我的第一篇博客，我只想用它来记录学习路程，之前项目遇见问题，我会查别人的博客，意识到了分享的重要性，于是开始将我的写作放到博客上来。如果有不对的地方，希望大家多多批评指正。 1.首先你需要安装git和node环境，假如你安装了node，npm是默认安装的。 2.安装hexo你可以先检查一下是否安装了hexo。 1$ hexo -v 如果没有输出版本号，接着安装 1$ npm i hexo -g">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/Users/yangmengxia/Desktop/hahh.png">
-<meta property="og:updated_time" content="2018-09-17T10:24:06.341Z">
+<meta property="og:image" content="http://yoursite.com/Users/yangmengxia/myblog/public/assets/blog/20180914/DNSconfig.png">
+<meta property="og:updated_time" content="2018-09-17T10:37:24.934Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="搭建一个基于github和hexo的博客">
 <meta name="twitter:description" content="这是我的第一篇博客，我只想用它来记录学习路程，之前项目遇见问题，我会查别人的博客，意识到了分享的重要性，于是开始将我的写作放到博客上来。如果有不对的地方，希望大家多多批评指正。 1.首先你需要安装git和node环境，假如你安装了node，npm是默认安装的。 2.安装hexo你可以先检查一下是否安装了hexo。 1$ hexo -v 如果没有输出版本号，接着安装 1$ npm i hexo -g">
-<meta name="twitter:image" content="http://yoursite.com/Users/yangmengxia/Desktop/hahh.png">
+<meta name="twitter:image" content="http://yoursite.com/Users/yangmengxia/myblog/public/assets/blog/20180914/DNSconfig.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -214,14 +214,17 @@
 </li>
 <li><p>2.获取github的IP地址：终端 <code>ping 用户名.github.io</code>记录下IP地址，这个IP是要和你的域名绑定的。</p>
 </li>
-<li><p>3.我是在阿里云购买的域名，登录&gt;控制台&gt;域名&gt;解析&gt;添加记录</p>
-<p><img src="/Users/yangmengxia/Desktop/hahh.png" alt="hahh"></p>
-<p>CNAME记录值是你的<code>用户名.github.io</code></p>
-<p>A对应的记录值是你刚才ping到的IP地址</p>
+<li><p>3.我是在阿里云购买的域名，登录&gt;控制台&gt;域名&gt;解析&gt;添加记录<img src="/Users/yangmengxia/myblog/public/assets/blog/20180914/DNSconfig.png" alt="DNSconfig"></p>
+<ul>
+<li><p>CNAME记录值是你的<code>用户名.github.io</code></p>
+</li>
+<li><p>A对应的记录值是你刚才ping到的IP地址</p>
+</li>
+</ul>
 </li>
 <li><p>4.根目录下的&gt;_config.yml修改<code>skip_render: CNAME</code></p>
 </li>
-<li><p>5.在你的本地的文件夹根目录&gt;source下创建一个没有后缀的，名为CNAME的文件，里面写上你的域名，之后<code>hexo -g</code>and <code>hexo -d</code> 之后大功告成。试试用你的域名访问你的博客吧！</p>
+<li><p>5.在你的本地的文件夹根目录&gt;source下创建一个没有后缀的，名为CNAME的文件，里面写上你的域名，注意写错了报404，之后<code>hexo -g</code>and <code>hexo -d</code> 之后大功告成。试试用你的域名访问你的博客吧！</p>
 </li>
 </ul>
 
