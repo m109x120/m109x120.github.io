@@ -16,7 +16,7 @@
 <meta property="og:description" content="这是我的第一篇博客，我只想用它来记录学习路程，之前项目遇见问题，我会查别人的博客，意识到了分享的重要性，于是开始将我的写作放到博客上来。如果有不对的地方，希望大家多多批评指正。 1.首先你需要安装git和node环境，假如你安装了node，npm是默认安装的。 2.安装hexo你可以先检查一下是否安装了hexo。 1$ hexo -v 如果没有输出版本号，接着安装 1$ npm i hexo -g">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/Users/yangmengxia/Desktop/hahh.png">
-<meta property="og:updated_time" content="2018-09-17T10:16:03.562Z">
+<meta property="og:updated_time" content="2018-09-17T10:24:06.341Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="搭建一个基于github和hexo的博客">
 <meta name="twitter:description" content="这是我的第一篇博客，我只想用它来记录学习路程，之前项目遇见问题，我会查别人的博客，意识到了分享的重要性，于是开始将我的写作放到博客上来。如果有不对的地方，希望大家多多批评指正。 1.首先你需要安装git和node环境，假如你安装了node，npm是默认安装的。 2.安装hexo你可以先检查一下是否安装了hexo。 1$ hexo -v 如果没有输出版本号，接着安装 1$ npm i hexo -g">
@@ -219,7 +219,9 @@
 <p>CNAME记录值是你的<code>用户名.github.io</code></p>
 <p>A对应的记录值是你刚才ping到的IP地址</p>
 </li>
-<li><p>4.在你的本地的文件夹根目录&gt;source下创建一个没有后缀的，名为CNAME的文件，里面写上你的域名，之后<code>hexo -g</code>and <code>hexo -d</code> 之后大功告成。试试用你的域名访问你的博客吧！</p>
+<li><p>4.根目录下的&gt;_config.yml修改<code>skip_render: CNAME</code></p>
+</li>
+<li><p>5.在你的本地的文件夹根目录&gt;source下创建一个没有后缀的，名为CNAME的文件，里面写上你的域名，之后<code>hexo -g</code>and <code>hexo -d</code> 之后大功告成。试试用你的域名访问你的博客吧！</p>
 </li>
 </ul>
 
