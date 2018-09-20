@@ -6,11 +6,11 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hexo</title>
+  <title>Archives: 2017 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/archives/2017/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="default">
 <meta name="twitter:card" content="summary">
@@ -152,383 +152,34 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-ES6" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/17/ES6/">ES6</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/17/ES6/" class="archive-article-date">
-  	<time datetime="2018-09-17T11:02:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-17</time>
-</a>
-        
-      </header>
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <contents>
-
-</contents>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
+    
       
       
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/17/ES6/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
         </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-reactProductEnvironment" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+        <div class="archives">
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/18/reactProductEnvironment/">react开发打包环境的搭建</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/18/reactProductEnvironment/" class="archive-article-date">
-  	<time datetime="2018-03-18T14:30:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-git的安装和配置"><a href="#1-git的安装和配置" class="headerlink" title="1.git的安装和配置"></a>1.git的安装和配置</h2><ul>
-<li><p>git安装(想必都会，只总结mac系统遇到的问题)</p>
-<p>官网下载git的.dmg安装包，双击打开，双击.pkg的安装包，😯，报错了…<code>打不开身份不明开发者</code>。这是由于mac安全限制外部下载的软件。</p>
-<p>解决方案：打开系统偏好设置&gt;安全与隐私&gt;通用：提示已阻止打开“git-…pkg”,因为来自身份不明的开发者。倔强地选择<code>仍要打开</code>。</p>
-<p>接着傻瓜式下一步…ok。</p>
-</li>
-<li><p>检测是不是安装成功了(成功输出git的版本号)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git --version</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>配置.gitconfig(它是一个用户目录下的隐藏文件，终端<code>ls</code>看不见隐藏文件，<code>ls -all</code>可以看见)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim ~/.gitconfig</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>进来之后，用小写字母<code>i</code>进入编辑模式，user不配置首次提交的时候也会让你输入，这里的email是注册git的时候使用的邮箱。alias是git命令简写，我只配了一些常用的。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[user]</span><br><span class="line">	name=Grace</span><br><span class="line">	email=***@163.com</span><br><span class="line">[<span class="built_in">alias</span>]</span><br><span class="line">	co=checkout</span><br><span class="line">	ci=commit</span><br><span class="line">	st=status</span><br><span class="line">	pl=pull</span><br><span class="line">	ps=push</span><br><span class="line">	dt=difftool</span><br><span class="line">	ca=commit -am</span><br><span class="line">	b=branch</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>写好之后按<code>ESC</code>推出编辑模式，输入<code>:wq+回车</code>保存并退出.gitconfig的编辑模式，我们还可以查看刚才的配置信息。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat ~/.gitconfig</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="2-项目的建立"><a href="#2-项目的建立" class="headerlink" title="2.项目的建立"></a>2.项目的建立</h2><ul>
-<li><p>获取ssh密钥邮箱是刚才配置的那个，执行完这条命令之后，一直回车到执行完</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">'***@163.com'</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>此时会在用户目录下生成一个.ssh的文件夹，cd到这个文件夹,<code>ls-all</code>查看所有文件，那个id_rsa.pub就是存放公钥的文件</p>
-<p><img src="/assets/blog/20180918/rsaPub.png" alt="rsaPub"></p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat id_rsa.pub</span><br></pre></td></tr></table></figure>
-<p>查看公钥内容，复制下来。</p>
-</li>
-<li><p>打开gitee.com，码云在国内，速度快。 创建一个项目&gt;管理&gt;部署公钥管理&gt;公钥管理&gt;添加个人共钥，把刚才在终端复制的公钥贴进来。</p>
-</li>
-<li><p>then可以把远程项目代码clone到本地了，克隆下载 &gt; 选择ssh，因为刚才已经添加过个人公钥了。</p>
-</li>
-<li><p>在用户目录下新建一个空文件夹用于存放项目，cd 到这个文件夹，git clone～～～，远程代码成功拉到本地。现在远程和本地已经建立起来了。</p>
-</li>
-<li><p>我们还需要添加一个.gitignore文件，忽略我们不需要push到仓库的文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim .gitignore</span><br></pre></td></tr></table></figure>
-<p>输入<code>i</code>进行编辑</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.DS_Store</span><br><span class="line">node_modules</span><br><span class="line">dist</span><br><span class="line">*.log</span><br></pre></td></tr></table></figure>
-<p><code>ESC</code> <code>:wq+回车</code> 保存成功，push到远程</p>
-</li>
-</ul>
-<h2 id="3-安装node-js和yarn"><a href="#3-安装node-js和yarn" class="headerlink" title="3.安装node.js和yarn"></a>3.安装node.js和yarn</h2><p>安装过程非常简单，记得指定版本。（node的安装官网很详细）</p>
-<p>为什么不用node自带的npm?</p>
-<p>因为yarn安装速度快，这种快并不仅仅是服务器快，而且并行下载，还有牛掰的缓存机制，之前装过的包是走缓存的，可以断网使用，到秒装效果。</p>
-<p>yarn与npm的语法对比</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Yarn</th>
-<th style="text-align:center">Npm</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">yarn init</td>
-<td style="text-align:center">npm init</td>
-</tr>
-<tr>
-<td style="text-align:center">yarn</td>
-<td style="text-align:center">npm install</td>
-</tr>
-<tr>
-<td style="text-align:center">yarn global add <a href="mailto:xxx@x.x.x" target="_blank" rel="noopener">xxx@x.x.x</a></td>
-<td style="text-align:center">npm install <a href="mailto:xxx@x.x.x" target="_blank" rel="noopener">xxx@x.x.x</a> -g</td>
-</tr>
-<tr>
-<td style="text-align:center">yarn add <a href="mailto:xxx@x.x.x" target="_blank" rel="noopener">xxx@x.x.x</a></td>
-<td style="text-align:center">npm install <a href="mailto:xxx@x.x.x" target="_blank" rel="noopener">xxx@x.x.x</a> –save</td>
-</tr>
-<tr>
-<td style="text-align:center">yarn add <a href="mailto:xxx@x.x.x" target="_blank" rel="noopener">xxx@x.x.x</a> –dev</td>
-<td style="text-align:center">npm install <a href="mailto:xxx@x.x.x" target="_blank" rel="noopener">xxx@x.x.x</a> –save-dev</td>
-</tr>
-<tr>
-<td style="text-align:center">yarn remove xxx</td>
-<td style="text-align:center">npm uninstall xxx –save(-dev)</td>
-</tr>
-<tr>
-<td style="text-align:center">yarn run xxx</td>
-<td style="text-align:center">npm run xxx</td>
-</tr>
-</tbody>
-</table>
-<h2 id="4-初始化项目"><a href="#4-初始化项目" class="headerlink" title="4.初始化项目"></a>4.初始化项目</h2><p>上一步安装完了node和yarn，cd到项目文件夹，初始化yarn，提示出的信息我们可以不填写，走默认的。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn init</span><br></pre></td></tr></table></figure>
-<p><code>git st</code>-&gt;<code>git add .</code>-&gt;<code>git ca &quot;yarn init&quot;</code>-&gt;<code>git ps</code>将文件推送到远程仓库</p>
-<h2 id="5-webpack的安装和配置"><a href="#5-webpack的安装和配置" class="headerlink" title="5.webpack的安装和配置"></a>5.webpack的安装和配置</h2><h3 id="5-1-webpack概念"><a href="#5-1-webpack概念" class="headerlink" title="5.1.webpack概念"></a>5.1.webpack概念</h3><p>前端资源打包工具，html，css，脚本，字体等资源都会被看作一个模块，都会被打包到js里。</p>
-<h3 id="5-2-多版本共存的解决方案"><a href="#5-2-多版本共存的解决方案" class="headerlink" title="5.2.多版本共存的解决方案"></a>5.2.多版本共存的解决方案</h3><p>全局只能安装一个啦，俩项目又不想使用同一个版本怎么搞啦！为了避免冲突，我们不可能在全局安装两个版本的webpack，node_modules&gt;.bin下面有一个可执行的webpack文件，使用这种方式，可以避免影响。webpack的安装。cd到项目根目录，为了避免冲突，这里所用到的所有工具，我都安装在项目里，不在全局安装。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add webpack@3.10.0 --dev</span><br></pre></td></tr></table></figure>
-<h3 id="5-3-entry"><a href="#5-3-entry" class="headerlink" title="5.3.entry"></a>5.3.entry</h3><p>在项目根目录下新建一个<code>webpack.config.js</code>,</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    entry: <span class="string">'./src/app.js'</span>,  <span class="comment">//这是需要打包的文件路径，配置react的时候会改为jsx后缀</span></span><br><span class="line">    output: &#123;</span><br><span class="line">        path: path.resolve(__dirname,<span class="string">'./dist'</span>), <span class="comment">//打包到目标文件夹</span></span><br><span class="line">        filename: <span class="string">'app.js'</span>                     <span class="comment">//打包成功后的文件命名方式</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以在src&gt;app.js随便写点东西，测试一下webpack是不是打包成功了。(下面的命令貌似有点长，最后再解决这个问题)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ node_modules/.bin/webpack</span><br></pre></td></tr></table></figure>
-<p>成功打包js～</p>
-<h3 id="5-4-html"><a href="#5-4-html" class="headerlink" title="5.4.html"></a>5.4.html</h3><p>安装htmlwebpackplugin插件，最好是指定版本（另外你安装了啥都在package.json文件里，这是yarn为我们自动生成的）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add html-webpack-plugin@2.30.1 --dev</span><br></pre></td></tr></table></figure>
-<p>配置htmlwebpackplugin插件</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在webpack.config.js里引入htmlwebpackplugin插件</span></span><br><span class="line"><span class="keyword">const</span> HtmlWebpackPlugin = <span class="built_in">require</span>(<span class="string">'html-webpack-plugin'</span>);</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    .</span><br><span class="line">    .</span><br><span class="line">    .</span><br><span class="line">    <span class="comment">//接着刚才的入口出口 写htmlwebpackplugin的配置</span></span><br><span class="line">    plugin: [</span><br><span class="line">        <span class="keyword">new</span> HtmlWebpackPlugin()</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>打包一次试试看看什么效果，打包方式同entry里的方法。dist文件夹下多一个index.html文件，它默认引入了dist&gt;app.js文件，但是看起来好像跟我们想要的不太一样，有些标签没加，比如视口大小没有定义等等。我们可以指定模版,<code>在src文件夹下新建一个index.html</code>把这个文件作为模版。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">plugin: [</span><br><span class="line">    <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">        <span class="comment">//引用模版文件,这个文件默认的输出就是dist&gt;index.html</span></span><br><span class="line">        template: <span class="string">'./src/index.html'</span>			</span><br><span class="line">    &#125;)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<h3 id="5-5-脚本"><a href="#5-5-脚本" class="headerlink" title="5.5.脚本"></a>5.5.脚本</h3><h4 id="5-5-1-ES6语法"><a href="#5-5-1-ES6语法" class="headerlink" title="5.5.1.ES6语法"></a>5.5.1.ES6语法</h4><p>在项目根目录下安装babel相关的插件，用于打包ES6的语法</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add babel-core@6.26.0 babel-preset-env@1.6.1 babel-loader@7.1.2 --dev</span><br></pre></td></tr></table></figure>
-<p>配置webpack.config.js</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    entry: <span class="string">'./src/app.js'</span>,  </span><br><span class="line">    <span class="comment">//使用react之后，文件后缀是jsx,与入口文件后缀保持一致</span></span><br><span class="line">    output: &#123;</span><br><span class="line">        path: path.resolve(__dirname,<span class="string">'./dist'</span>), </span><br><span class="line">        filename: <span class="string">'app.js'</span>                     </span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">//babel的配置开始</span></span><br><span class="line">    <span class="built_in">module</span>: &#123;</span><br><span class="line">        rules: [</span><br><span class="line">            &#123;</span><br><span class="line">               test:<span class="regexp">/\.js$/</span>,</span><br><span class="line">                <span class="comment">//使用react之后文件后缀改为了jsx</span></span><br><span class="line">                exclude: <span class="regexp">/(node_modules)/</span>,  <span class="comment">//对参数不做处理</span></span><br><span class="line">                use: &#123;</span><br><span class="line">                    loader: <span class="string">'babel-loader'</span>,</span><br><span class="line">                    options: &#123;</span><br><span class="line">                        presets: [<span class="string">'env'</span>]</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ]   </span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">//babel配置结束</span></span><br><span class="line">    .</span><br><span class="line">    .</span><br><span class="line">    .</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>之后在src&gt;app.js里写入ES6语法的代码，之后打包，我们会发现dist&gt;app.js里面已经被转为ES5的语法了。</p>
-<h4 id="5-5-2-react语法处理（相对好搞的部分）"><a href="#5-5-2-react语法处理（相对好搞的部分）" class="headerlink" title="5.5.2 react语法处理（相对好搞的部分）"></a>5.5.2 react语法处理（相对好搞的部分）</h4><p>项目根目录装插件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add babel-preset-react@6.24.1 --dev</span><br></pre></td></tr></table></figure>
-<p>配置webpack.config.js，在刚才配置babel的preset环境中添加react,把js文件后缀改为jsx就ok了。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">presets: [<span class="string">'env react'</span>]</span><br></pre></td></tr></table></figure>
-<p>安装react，这是我们代码里要用的，不是生产工具</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add react@16.2.0 react-dom@16.2.0</span><br></pre></td></tr></table></figure>
-<p>在src&gt;app.jsx下书写react代码，打包成功啦～</p>
-<h3 id="5-6-样式"><a href="#5-6-样式" class="headerlink" title="5.6.样式"></a>5.6.样式</h3><p>需要配置style-loader，css-loader ，sass-loader</p>
-<h4 id="5-6-1-安装style-loader和css-loader"><a href="#5-6-1-安装style-loader和css-loader" class="headerlink" title="5.6.1 安装style-loader和css-loader"></a>5.6.1 安装style-loader和css-loader</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add style-loader@0.19.1 css-loader@0.28.8 --dev</span><br></pre></td></tr></table></figure>
-<p>修改配置文件，在rules中的react语法后接着配置</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//style-loader与css-loader的配置信息</span></span><br><span class="line">&#123;</span><br><span class="line">    test: <span class="regexp">/\.css$/</span>,</span><br><span class="line">    use: [</span><br><span class="line">        <span class="string">'style-loader'</span>,</span><br><span class="line">        <span class="string">'css-loader'</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//style-loader与css-loader的配置信息结束</span></span><br></pre></td></tr></table></figure>
-<p>在src&gt;新建index.css,写点样式，在src&gt;app.jsx中引入css</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'./index.css'</span></span><br></pre></td></tr></table></figure>
-<p>打包成功，css被打包到dist&gt;app.js中，我测试的dist下的文件，样式生效～，但是以这种方式打包出来的样式要等到所有js加载完成之后css在执行，有可能会出现网页裸奔效果，所以，我们应该想办法把它单独放在一个css文件里，然后 打包后 dist&gt;app.js已经引入～</p>
-<p>安装extract-text-webpack-plugin</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add extract-text-webpack-plugin@3.0.2 --dev</span><br></pre></td></tr></table></figure>
-<p>配置webpack.config.js，把刚才配置的css里的use改为下面的代码,另外需要引入，new插件</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//extract-text-webpack-plugin 引入</span></span><br><span class="line"><span class="keyword">const</span> ExtractTextPlugin = <span class="built_in">require</span>(<span class="string">'extract-text-webpack-plugin'</span>);</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">	 		.</span><br><span class="line">    		.</span><br><span class="line">    		.</span><br><span class="line">    <span class="built_in">module</span>: &#123;</span><br><span class="line">        rules: [</span><br><span class="line">            <span class="comment">//react语法的处理</span></span><br><span class="line">            .</span><br><span class="line">            .</span><br><span class="line">            .</span><br><span class="line">            <span class="comment">//css文件的处理</span></span><br><span class="line">            &#123;</span><br><span class="line">                test: <span class="regexp">/\.css$/</span>,</span><br><span class="line">                <span class="comment">//extract-text-webpack-plugin</span></span><br><span class="line">                use: ExtractTextPlugin.extract(&#123;</span><br><span class="line">                    fallback: <span class="string">"style-loader"</span>,</span><br><span class="line">                    use: <span class="string">"css-loader"</span></span><br><span class="line">                &#125;)</span><br><span class="line">                <span class="comment">//extract-text-webpack-plugin</span></span><br><span class="line">            &#125;</span><br><span class="line">        ]   </span><br><span class="line">    &#125;,</span><br><span class="line">    plugin: [</span><br><span class="line">        <span class="comment">//extract-text-webpack-plugin 生成文件的位置</span></span><br><span class="line">        <span class="keyword">new</span> ExtractTextPlugin(<span class="string">'index.css'</span>)</span><br><span class="line">        <span class="comment">//extract-text-webpack-plugin</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>打包成功，～，css自动被引入了，</p>
-<h4 id="5-6-2处理sass"><a href="#5-6-2处理sass" class="headerlink" title="5.6.2处理sass"></a>5.6.2处理sass</h4><p>安装sass-loader</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add sass-loader@6.0.6 --dev</span><br></pre></td></tr></table></figure>
-<p>在webpack.config.js的module里的css文件的处理后，添加</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//sass文件的处理</span></span><br><span class="line">&#123;</span><br><span class="line">    test: <span class="regexp">/\.scss$/</span>,</span><br><span class="line">    use: ExtractTextPlugin.extract(&#123;</span><br><span class="line">        fallback: <span class="string">'style-loader'</span>,</span><br><span class="line">        use: [<span class="string">'css-loader'</span>,<span class="string">'sass-loader'</span>]</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在src下面新建一个scss文件，在app.jsx中引入这个文件，打包成功，成功，，，哎？尼玛，报错了。。。而且还是scss文件的语法错误，尼玛三行测试代码有错，不科学呐～</p>
-<p>一顿找。。</p>
-<p>因为，sass-loader依赖node-sass和webpack,赶紧安装一下，此包安装的时间可真久，</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add node-sass@4.7.2 --dev</span><br></pre></td></tr></table></figure>
-<p>这回打包成功了～</p>
-<h3 id="5-7图片和静态文件的处理"><a href="#5-7图片和静态文件的处理" class="headerlink" title="5.7图片和静态文件的处理"></a>5.7图片和静态文件的处理</h3><blockquote>
-<p>这或许有点麻烦了</p>
-</blockquote>
-<h4 id="5-7-1-图片的配置"><a href="#5-7-1-图片的配置" class="headerlink" title="5.7.1 图片的配置"></a>5.7.1 图片的配置</h4><p>安装url-loader,url-loader依赖file-loader</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add file-loader@1.1.6 url-loader@0.6.2 --dev</span><br></pre></td></tr></table></figure>
-<p>在刚才的webpack.config.js中的sass文件处理后接着写</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//图片的配置</span></span><br><span class="line">&#123;</span><br><span class="line">    test: <span class="regexp">/\.(png|jpg|gif)$/</span>,</span><br><span class="line">    use: [</span><br><span class="line">        &#123;</span><br><span class="line">            loader: <span class="string">'url-loader'</span>,</span><br><span class="line">            options: &#123;</span><br><span class="line">                limit: <span class="number">8192</span> <span class="comment">//小于这个大小的图片资源直接转成base64</span></span><br><span class="line">                name: <span class="string">'resource/[name].[ext]'</span>  <span class="comment">//文件打包后的位置</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">     ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以试试一张图片是不是被打包成功了，</p>
-<h4 id="5-7-2-配置字体（font-Awesome）"><a href="#5-7-2-配置字体（font-Awesome）" class="headerlink" title="5.7.2 配置字体（font-Awesome）"></a>5.7.2 配置字体（font-Awesome）</h4><p>安装一个font-Awesome</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add font-awesome</span><br></pre></td></tr></table></figure>
-<p>配置webpack.config.js，接着图片处理写</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//字体的处理</span></span><br><span class="line">&#123;</span><br><span class="line">    test: <span class="regexp">/\.(eot|svg|ttf|woff|woff2|otf)$/</span>,</span><br><span class="line">    use: [</span><br><span class="line">        &#123;</span><br><span class="line">            loader: <span class="string">'url-loader'</span>,</span><br><span class="line">            options: &#123;</span><br><span class="line">                limit: <span class="number">8192</span></span><br><span class="line">                name: <span class="string">'resource/[name].[ext]'</span>  <span class="comment">//文件打包后的位置</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">     ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>打包成功，dist目录多了很多文件。</p>
-<h4 id="5-7-3-通用模块提取的插件"><a href="#5-7-3-通用模块提取的插件" class="headerlink" title="5.7.3 通用模块提取的插件"></a>5.7.3 通用模块提取的插件</h4><p>在webpack.config.js的plugin中</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> webpack = <span class="built_in">require</span>(<span class="string">'webpack'</span>); </span><br><span class="line">plugins: [</span><br><span class="line">    <span class="comment">//处理html文件</span></span><br><span class="line">   		.</span><br><span class="line">    	.</span><br><span class="line">    	.</span><br><span class="line">    <span class="comment">//独立css文件</span></span><br><span class="line">    <span class="keyword">new</span> ExtractTextPlugin(<span class="string">'css/[name].css'</span>),</span><br><span class="line">    <span class="comment">//提出公共模块的插件</span></span><br><span class="line">    <span class="keyword">new</span> webpack.optimize.CommonsChunkPlugin(&#123;</span><br><span class="line">        name: <span class="string">'common'</span>,</span><br><span class="line">        filename: <span class="string">'js/base.js'</span> <span class="comment">//通用的文件被打包到这个文件里</span></span><br><span class="line">    &#125;)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<h4 id="5-7-4-webpack-dev-server-自动刷新"><a href="#5-7-4-webpack-dev-server-自动刷新" class="headerlink" title="5.7.4 webpack-dev-server 自动刷新"></a>5.7.4 webpack-dev-server 自动刷新</h4><p>安装webpack-dev-server</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add webpack-dev-server@2.9.7 --dev</span><br></pre></td></tr></table></figure>
-<p>在webpack .config.js的最后，在出口里，定一个一个公共路径，不然后字体文件找不到路径，因为服务器是从根目录开始找的</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">output: &#123;</span><br><span class="line">    path: path.resolve(__dirname,<span class="string">'./dist'</span>),</span><br><span class="line">    publicPath: <span class="string">'/dist/'</span>,</span><br><span class="line">    filename: <span class="string">'js/app.js'</span></span><br><span class="line">&#125;,</span><br><span class="line">devServer: &#123;</span><br><span class="line">    port: <span class="number">8086</span>  <span class="comment">//默认的8080端口可能会被占用，所以修改</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>之后每改动一次文件，浏览器是自动刷新的。</p>
-<p>最后一步，在package.json中配置一些脚本，只是有些命令太长了，</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">    "dev": "node_modules/.bin/webpack-dev-server",</span><br><span class="line">    "dist": "node_modules/.bin/webpack -p"  //线上环境的打包</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-<p><code>yarn run dev</code>就可以开启本地服务，会默认打包的，</p>
-<p>到此，一个简单的react开发环境搭完成，但是，，这并不是最终的，这只是最简单的配置，在开发过程中还会进行别的配置。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">webpack</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/18/reactProductEnvironment/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hellohexo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/12/hellohexo/">搭建一个基于github和hexo的博客</a>
-    </h1>
-  
-
-        
-        <a href="/2017/01/12/hellohexo/" class="archive-article-date">
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2017/01/12/hellohexo/" class="archive-article-date">
   	<time datetime="2017-01-12T14:00:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-12</time>
 </a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这是我的第一篇博客，我只想用它来记录学习路程，之前项目遇见问题，我会查别人的博客，意识到了分享的重要性，于是开始将我的写作放到博客上来。如果有不对的地方，希望大家多多批评指正。</p>
-<h2 id="1-首先"><a href="#1-首先" class="headerlink" title="1.首先"></a>1.首先</h2><p>你需要安装git和node环境，假如你安装了node，npm是默认安装的。</p>
-<h2 id="2-安装hexo"><a href="#2-安装hexo" class="headerlink" title="2.安装hexo"></a>2.安装hexo</h2><p>你可以先检查一下是否安装了hexo。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo -v</span><br></pre></td></tr></table></figure>
-<p>如果没有输出版本号，接着安装</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm i hexo -g</span><br></pre></td></tr></table></figure>
-<h2 id="3-创建git仓库"><a href="#3-创建git仓库" class="headerlink" title="3.创建git仓库"></a>3.创建git仓库</h2><p>登陆你的git账号，建立一个仓库，这个仓库名字必须是 <code>用户名.github.io</code>,并且一个github账号只能注册一个博客地址。本文所有的<code>用户名</code>都代表你的github用户名</p>
-<h2 id="4-创建本地博客文件夹"><a href="#4-创建本地博客文件夹" class="headerlink" title="4.创建本地博客文件夹"></a>4.创建本地博客文件夹</h2><p>在你喜欢的任何地方创建一个文件夹，用来创建本地博客，打开终端，cd到这个文件夹，初始化hexo</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init</span><br></pre></td></tr></table></figure>
-<p>这个过程有可能会报安装依赖失败的error，我在win10上没有遇见，在mac上遇见了，此时安装依赖，即执行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
-<p>初始化完成之后，你就可以在本地预览你的博客了，启动服务器，s是server的意思，即执行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo s</span><br></pre></td></tr></table></figure>
-<p>在本地浏览器地址栏输入<code>http://localhost:4000/</code>可以本地预览你的作品。不过可能看起来似乎有点low。但后期是可以更改主题的。</p>
-<h2 id="5-将本地博客推送至远程git仓库"><a href="#5-将本地博客推送至远程git仓库" class="headerlink" title="5.将本地博客推送至远程git仓库"></a>5.将本地博客推送至远程git仓库</h2><p>找到本地博客文件夹，根目录的_config.yml，拉到最后修改一个配置，注意冒号后有一个空格，每个键名前是两个空格。末尾不要留下空格</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  branch: master</span><br><span class="line">  repository: https://github.com/用户名/用户名.github.io.git</span><br></pre></td></tr></table></figure>
-<p>开始准备上传</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g</span><br></pre></td></tr></table></figure>
-<p>上传</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
-<p>我在此处出错了，执行下面命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm i hexo-deployer-git</span><br></pre></td></tr></table></figure>
-<p>下载完依赖之后再次执行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
-<p>上传成功，在浏览器上访问<code>你的用户名.github.io</code>,就可以访问了</p>
-<h2 id="6-如何增加博客？"><a href="#6-如何增加博客？" class="headerlink" title="6.如何增加博客？"></a>6.如何增加博客？</h2><p>在你博客文件夹下运行终端，创建一篇文章</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new 文章名字</span><br></pre></td></tr></table></figure>
-<p>找到根目录下的source/_posts文件夹，你刚创建的博客md文档就出现了，你就可以在这里编写你的博客了，写好之后你预览了没问题就可以上传</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g </span><br><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
-<h2 id="7-修改主题"><a href="#7-修改主题" class="headerlink" title="7.修改主题"></a>7.修改主题</h2><p>如果你不喜欢那种原生的田园风格，可以尝试更换主题，我采用的主题是<code>https://github.com/litten/hexo-theme-yilia</code>,具体配置方案上面有文档，需要注意的是头像的图片地址放在yilia/source下路径，具体你想放在哪里写在yilia/_config.yml配置文件里就行啦！另外这是主题的中文文档地址<a href="http://moxfive.coding.me/yelee/" target="_blank" rel="noopener">http://moxfive.coding.me/yelee/</a></p>
-<h2 id="8-绑定域名"><a href="#8-绑定域名" class="headerlink" title="8.绑定域名"></a>8.绑定域名</h2><blockquote>
-<p>这个要看你想不想绑定了，我是之前就有购买域名，所以用在了这里</p>
-</blockquote>
-<ul>
-<li>1.如果你的域名需要实名认证，请提前认证，大概需要两三天吧。</li>
-<li>2.获取github的IP地址：终端 <code>ping 用户名.github.io</code>记录下IP地址，这个IP是要和你的域名绑定的。</li>
-<li><p>3.我是在阿里云购买的域名，登录&gt;控制台&gt;域名&gt;解析&gt;添加记录<img src="/assets/blog/20180914/DNSconfig.png" alt="DNSconfig"></p>
-<ul>
-<li><p>CNAME记录值是你的<code>用户名.github.io</code></p>
-</li>
-<li><p>A对应的记录值是你刚才ping到的IP地址</p>
-</li>
-</ul>
-</li>
-<li>4.根目录下的&gt;_config.yml修改<code>skip_render: CNAME</code></li>
-<li>5.在你的本地的文件夹根目录&gt;source下创建一个没有后缀的，名为CNAME的文件，里面写上你的域名，注意写错了报404，之后<code>hexo -g</code>and <code>hexo -d</code> 之后大功告成。试试用你的域名访问你的博客吧！</li>
-</ul>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/01/12/hellohexo/">搭建一个基于github和hexo的博客</a>
+    </h1>
+  
 
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -540,41 +191,19 @@
 		</ul>
 	</div>
 
-      
+          
 
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/01/12/hellohexo/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
+    </div></section>
+  
+
+    
 
 
           </div>
@@ -596,9 +225,9 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
+		isHome: false,
 		isPost: false,
-		isArchive: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
