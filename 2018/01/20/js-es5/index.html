@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/1 | Hexo</title>
+  <title>原生ES5里的一道有趣的题目 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/2017/01/index.html">
+  <meta name="description" content="咋一看最后俩有点蒙了，可能是我一般不这么写的原因，很考察JS基础的一道题目，哎～，对了，你高程刷几遍了？据说这是美团的一道面试题，但是貌似也是面试中常见的题目。如果你对我的分析有别的见解，还请多多指教！">
+<meta name="keywords" content="ES5,预解析,面试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="原生ES5里的一道有趣的题目">
+<meta property="og:url" content="http://yoursite.com/2018/01/20/js-es5/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="咋一看最后俩有点蒙了，可能是我一般不这么写的原因，很考察JS基础的一道题目，哎～，对了，你高程刷几遍了？据说这是美团的一道面试题，但是貌似也是面试中常见的题目。如果你对我的分析有别的见解，还请多多指教！">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-09-21T08:05:40.183Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="原生ES5里的一道有趣的题目">
+<meta name="twitter:description" content="咋一看最后俩有点蒙了，可能是我一般不这么写的原因，很考察JS基础的一道题目，哎～，对了，你高程刷几遍了？据说这是美团的一道面试题，但是貌似也是面试中常见的题目。如果你对我的分析有别的见解，还请多多指教！">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,60 +155,245 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-js-es5" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/12/hellohexo/" class="archive-article-date">
-  	<time datetime="2017-01-12T14:00:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-12</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/12/hellohexo/">搭建一个基于github和hexo的博客</a>
+    <h1 class="article-title" itemprop="name">
+      原生ES5里的一道有趣的题目
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/01/20/js-es5/" class="archive-article-date">
+  	<time datetime="2018-01-20T15:26:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>咋一看最后俩有点蒙了，可能是我一般不这么写的原因，很考察JS基础的一道题目，哎～，对了，你高程刷几遍了？据说这是美团的一道面试题，但是貌似也是面试中常见的题目。如果你对我的分析有别的见解，还请多多指教！<br><a id="more"></a></p>
+<h2 id="先看题目，假设弹出几就给函数编号为几号"><a href="#先看题目，假设弹出几就给函数编号为几号" class="headerlink" title="先看题目，假设弹出几就给函数编号为几号"></a>先看题目，假设弹出几就给函数编号为几号</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log (<span class="number">1</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line">Foo.getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log (<span class="number">2</span>);</span><br><span class="line">&#125;;</span><br><span class="line">Foo.prototype.getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">3</span>);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log (<span class="number">4</span>);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log (<span class="number">5</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 请写出一下的输出结果</span></span><br><span class="line">Foo.getName();          <span class="comment">//1行</span></span><br><span class="line">getName();		        <span class="comment">//2行</span></span><br><span class="line">Foo().getName();	    <span class="comment">//3行</span></span><br><span class="line">getName();			    <span class="comment">//4行</span></span><br><span class="line"><span class="keyword">new</span> Foo.getName();	    <span class="comment">//5行</span></span><br><span class="line"><span class="keyword">new</span> Foo().getName();    <span class="comment">//6行</span></span><br><span class="line"><span class="keyword">new</span> <span class="keyword">new</span> Foo().getName();<span class="comment">//7行</span></span><br></pre></td></tr></table></figure>
+<p>我看到的时候，答对了前五道。后两道请教了大牛才明白，看来还是得多看高程啊。</p>
+<h2 id="1-预解析"><a href="#1-预解析" class="headerlink" title="1 .预解析"></a>1 .预解析</h2><p>首先，ES5对，var,function关键字声明的变量，函数进行预解析。</p>
+<p>本段代码预解析之后，我们得到</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log (<span class="number">1</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log (<span class="number">5</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="2-代码执行"><a href="#2-代码执行" class="headerlink" title="2.代码执行"></a>2.代码执行</h2><p>虽然预解析过程中，getName被赋值为代码块，但是，在执行</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log (<span class="number">4</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>的时候全局的getName函数被重新赋值给四号函数。所以在执行输出之前我们得到的是</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Foo整体代码块</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log (<span class="number">1</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//此间var getName被预解析为undefined，但是之后的getName函数进行了覆盖。</span></span><br><span class="line"><span class="comment">//getName整体代码块</span></span><br><span class="line"><span class="keyword">var</span> getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log (<span class="number">4</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>在执行输出之前，必须明确的是：</p>
+<p><code>1号getName函数没有关键字this，它不是Foo的私有函数，此处的getName函数只是在修改全局的getName函数。</code><br><code>2号函数是Foo上的方法，Foo的实例对象打点无法调用到。</code></p>
+<p>开始执行</p>
+<table>
+<thead>
+<tr>
+<th>行号</th>
+<th style="text-align:left">分析</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td style="text-align:left">Foo身上的getName方法一直都是2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>2</td>
+<td style="text-align:left">全局的getName现在是4</td>
+<td>4</td>
+</tr>
+<tr>
+<td>3</td>
+<td style="text-align:left">Foo执行会修改全局的getName为1，返回值是它的调用者，这里没写，默认window，打点调用window的getName方法得到的是：1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>4</td>
+<td style="text-align:left">getName();全局的getName执行</td>
+<td>1</td>
+</tr>
+<tr>
+<td>5</td>
+<td style="text-align:left">这个时候并没有先执行new调用Foo，new运算符的优先级没有点的高，而是先执行了Foo.getName。现在就是在new function () {console.log (2);}</td>
+<td>2</td>
+</tr>
+<tr>
+<td>6</td>
+<td style="text-align:left">虽然我们在new调用构造函数的时候()的作用是传参，但是在接着打点调用它原型上的方法的时候，括号的作用就是不仅仅是传参了，而是可以提高new运算符的优先级。所以这段代码，先new Foo()返回Foo的实例对象，调用实例对象身上的方法getName方法，</td>
+<td>3</td>
+</tr>
+<tr>
+<td>7</td>
+<td style="text-align:left">new new Foo().getName();相当于new Foo的实例对象的getName方法 。new function () {console.log(3);};</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>总结：几行代码，大坑小坑不断，虽然这个时候通了，但我可能过一段时间会遗忘，给自己立一个里程碑，学习，不仅仅是要向前走，还要把所学东西分门别类的整理好。另外记录一些题外话，最近，我老能提前感知未来发生的事情，第六感准到自己都会半夜被吓醒，我究其原因：我近一年的业余时间，都在研究这个事情，要是我能把这个尽头放在前端上，又或者是股票，那我岂不是要达到很高的境界了。～加油Grace～</p>
+</blockquote>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>感谢支持<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ES5</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">预解析</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/01/20/js-es5/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2018/03/18/reactProductEnvironment/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          react开发打包环境的搭建
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/01/12/hellohexo/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">搭建一个基于github和hexo的博客</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -233,8 +423,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
