@@ -6,15 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 面试 | Hexo</title>
+  <title>后端设定CORS，能访问数据接口，但是cookie，session无法冲破跨域限制 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/tags/面试/index.html">
+  <meta name="description" content="跨域导致的问题，后端开启CORS后，虽然能访问后端接口，但是cookie，session没办法冲破限制。">
+<meta name="keywords" content="跨域">
+<meta property="og:type" content="article">
+<meta property="og:title" content="后端设定CORS，能访问数据接口，但是cookie，session无法冲破跨域限制">
+<meta property="og:url" content="http://yoursite.com/2017/09/27/CORS-928-0/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="跨域导致的问题，后端开启CORS后，虽然能访问后端接口，但是cookie，session没办法冲破限制。">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/assets/blog/20170927/httpd.conf.png">
+<meta property="og:image" content="http://yoursite.com/assets/blog/20170927/httpd-vhosts.conf.png">
+<meta property="og:updated_time" content="2018-09-28T03:57:36.210Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="后端设定CORS，能访问数据接口，但是cookie，session无法冲破跨域限制">
+<meta name="twitter:description" content="跨域导致的问题，后端开启CORS后，虽然能访问后端接口，但是cookie，session没办法冲破限制。">
+<meta name="twitter:image" content="http://yoursite.com/assets/blog/20170927/httpd.conf.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,68 +158,186 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-CORS-928-0" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/01/20/js-es5/" class="archive-article-date">
-  	<time datetime="2018-01-20T15:26:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-20</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/20/js-es5/">原生ES5里的一道有趣的题目</a>
+    <h1 class="article-title" itemprop="name">
+      后端设定CORS，能访问数据接口，但是cookie，session无法冲破跨域限制
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/09/27/CORS-928-0/" class="archive-article-date">
+  	<time datetime="2017-09-27T12:08:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>跨域导致的问题，后端开启CORS后，虽然能访问后端接口，但是cookie，session没办法冲破限制。<br><a id="more"></a></p>
+<h2 id="1-配置apache反向代理"><a href="#1-配置apache反向代理" class="headerlink" title="1.配置apache反向代理"></a>1.配置apache反向代理</h2><h3 id="1-1-配置httpd-conf"><a href="#1-1-配置httpd-conf" class="headerlink" title="1.1 配置httpd.conf"></a>1.1 配置httpd.conf</h3><p>打开httpd.conf</p>
+<p><img src="/assets/blog/20170927/httpd.conf.png" alt="httpd.conf"></p>
+<p>开启如下模块，行号参考，不一定准确</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LoadModule proxy_module libexec/apache2/mod_proxy.so                  --<span class="number">-132</span>行</span><br><span class="line">LoadModule proxy_http_module libexec/apache2/mod_proxy_http.so        --<span class="number">-135</span>行</span><br><span class="line">Include /<span class="keyword">private</span>/etc/apache2/extra/httpd-vhosts.conf                  --<span class="number">-517</span>行</span><br></pre></td></tr></table></figure>
+<h3 id="1-2-配置httpd-vhosts-conf"><a href="#1-2-配置httpd-vhosts-conf" class="headerlink" title="1.2  配置httpd-vhosts.conf"></a>1.2  配置httpd-vhosts.conf</h3><p>打开下面的文件配置域名与反向代理，具体路径，按自己的来。</p>
+<p><img src="/assets/blog/20170927/httpd-vhosts.conf.png" alt="httpd-vhosts.conf"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;VirtualHost *:<span class="number">80</span>&gt;</span><br><span class="line">    DocumentRoot <span class="string">"/Users/grace/ymx"</span></span><br><span class="line">    ServerName www.ymx.com</span><br><span class="line">    ServerAlias ymx.com</span><br><span class="line">  &lt;Directory <span class="string">"/Users/grace/ymx"</span>&gt;</span><br><span class="line">      Options Indexes FollowSymLinks ExecCGI</span><br><span class="line">      DirectoryIndex</span><br><span class="line">      AllowOverride All</span><br><span class="line">      Order allow,deny</span><br><span class="line">      Allow <span class="keyword">from</span> all</span><br><span class="line">     Require all granted</span><br><span class="line">  &lt;<span class="regexp">/Directory&gt;</span></span><br><span class="line"><span class="regexp">  #开启反向代理</span></span><br><span class="line"><span class="regexp">  ProxyRequests Off</span></span><br><span class="line"><span class="regexp">  #使用/</span>api代替http:<span class="comment">//localhost:3000</span></span><br><span class="line">  ProxyPass /api http:<span class="comment">//localhost:3000</span></span><br><span class="line">&lt;<span class="regexp">/VirtualHost&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="1-3-配置hosts"><a href="#1-3-配置hosts" class="headerlink" title="1.3 配置hosts"></a>1.3 配置hosts</h3><p>最后在hosts文件里添加域名IP对照，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1   ymx.com</span><br></pre></td></tr></table></figure>
+<p>可能这三个文件会有不同的修改顺序，但是别忘了重启apache，注意在使用的时候ajax里的url参数加上/api，例如：’/api/user/login’</p>
+<h2 id="2-CORS方式"><a href="#2-CORS方式" class="headerlink" title="2.CORS方式"></a>2.CORS方式</h2>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>感谢支持<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ES5</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">预解析</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">跨域</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/09/27/CORS-928-0/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2018/01/20/js-es5/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          原生ES5里的一道有趣的题目
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/01/12/hellohexo/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">搭建一个基于github和hexo的博客</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -241,9 +367,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
