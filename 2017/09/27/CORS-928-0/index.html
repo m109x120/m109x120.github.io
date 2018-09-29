@@ -8,20 +8,21 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>后端设定CORS，能访问数据接口，但是cookie，session无法冲破跨域限制 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="跨域导致的问题，后端开启CORS后，虽然能访问后端接口，但是cookie，session没办法冲破限制。">
+  <meta name="description" content="跨域导致的问题，后端开启CORS后，虽然能访问后端接口，但是会话机制没办法冲破跨域限制。做登录时候出现问题，我把前端代码放在本地Apache服务器上，他默认80端口，node提供数据，默认3000端口，此时我通过ajax访问数据，肯定会出现跨域问题。。。">
 <meta name="keywords" content="跨域">
 <meta property="og:type" content="article">
 <meta property="og:title" content="后端设定CORS，能访问数据接口，但是cookie，session无法冲破跨域限制">
 <meta property="og:url" content="http://yoursite.com/2017/09/27/CORS-928-0/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="跨域导致的问题，后端开启CORS后，虽然能访问后端接口，但是cookie，session没办法冲破限制。">
+<meta property="og:description" content="跨域导致的问题，后端开启CORS后，虽然能访问后端接口，但是会话机制没办法冲破跨域限制。做登录时候出现问题，我把前端代码放在本地Apache服务器上，他默认80端口，node提供数据，默认3000端口，此时我通过ajax访问数据，肯定会出现跨域问题。。。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/assets/blog/20170927/httpd.conf.png">
 <meta property="og:image" content="http://yoursite.com/assets/blog/20170927/httpd-vhosts.conf.png">
-<meta property="og:updated_time" content="2018-09-28T03:57:36.210Z">
+<meta property="og:image" content="http://yoursite.com/assets/blog/20170927/proxy.png">
+<meta property="og:updated_time" content="2018-09-29T07:43:36.383Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="后端设定CORS，能访问数据接口，但是cookie，session无法冲破跨域限制">
-<meta name="twitter:description" content="跨域导致的问题，后端开启CORS后，虽然能访问后端接口，但是cookie，session没办法冲破限制。">
+<meta name="twitter:description" content="跨域导致的问题，后端开启CORS后，虽然能访问后端接口，但是会话机制没办法冲破跨域限制。做登录时候出现问题，我把前端代码放在本地Apache服务器上，他默认80端口，node提供数据，默认3000端口，此时我通过ajax访问数据，肯定会出现跨域问题。。。">
 <meta name="twitter:image" content="http://yoursite.com/assets/blog/20170927/httpd.conf.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -178,18 +179,25 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>跨域导致的问题，后端开启CORS后，虽然能访问后端接口，但是cookie，session没办法冲破限制。<br><a id="more"></a></p>
+        <p>跨域导致的问题，后端开启CORS后，虽然能访问后端接口，但是会话机制没办法冲破跨域限制。做登录时候出现问题，我把前端代码放在本地Apache服务器上，他默认80端口，node提供数据，默认3000端口，此时我通过ajax访问数据，肯定会出现跨域问题。。。<br><a id="more"></a></p>
 <h2 id="1-配置apache反向代理"><a href="#1-配置apache反向代理" class="headerlink" title="1.配置apache反向代理"></a>1.配置apache反向代理</h2><h3 id="1-1-配置httpd-conf"><a href="#1-1-配置httpd-conf" class="headerlink" title="1.1 配置httpd.conf"></a>1.1 配置httpd.conf</h3><p>打开httpd.conf</p>
 <p><img src="/assets/blog/20170927/httpd.conf.png" alt="httpd.conf"></p>
 <p>开启如下模块，行号参考，不一定准确</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LoadModule proxy_module libexec/apache2/mod_proxy.so                  --<span class="number">-132</span>行</span><br><span class="line">LoadModule proxy_http_module libexec/apache2/mod_proxy_http.so        --<span class="number">-135</span>行</span><br><span class="line">Include /<span class="keyword">private</span>/etc/apache2/extra/httpd-vhosts.conf                  --<span class="number">-517</span>行</span><br></pre></td></tr></table></figure>
 <h3 id="1-2-配置httpd-vhosts-conf"><a href="#1-2-配置httpd-vhosts-conf" class="headerlink" title="1.2  配置httpd-vhosts.conf"></a>1.2  配置httpd-vhosts.conf</h3><p>打开下面的文件配置域名与反向代理，具体路径，按自己的来。</p>
 <p><img src="/assets/blog/20170927/httpd-vhosts.conf.png" alt="httpd-vhosts.conf"></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;VirtualHost *:<span class="number">80</span>&gt;</span><br><span class="line">    DocumentRoot <span class="string">"/Users/grace/ymx"</span></span><br><span class="line">    ServerName www.ymx.com</span><br><span class="line">    ServerAlias ymx.com</span><br><span class="line">  &lt;Directory <span class="string">"/Users/grace/ymx"</span>&gt;</span><br><span class="line">      Options Indexes FollowSymLinks ExecCGI</span><br><span class="line">      DirectoryIndex</span><br><span class="line">      AllowOverride All</span><br><span class="line">      Order allow,deny</span><br><span class="line">      Allow <span class="keyword">from</span> all</span><br><span class="line">     Require all granted</span><br><span class="line">  &lt;<span class="regexp">/Directory&gt;</span></span><br><span class="line"><span class="regexp">  #开启反向代理</span></span><br><span class="line"><span class="regexp">  ProxyRequests Off</span></span><br><span class="line"><span class="regexp">  #使用/</span>api代替http:<span class="comment">//localhost:3000</span></span><br><span class="line">  ProxyPass /api http:<span class="comment">//localhost:3000</span></span><br><span class="line">&lt;<span class="regexp">/VirtualHost&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;VirtualHost *:<span class="number">80</span>&gt;</span><br><span class="line">    DocumentRoot <span class="string">"/Users/grace/ymx"</span></span><br><span class="line">    ServerName www.ymx.com</span><br><span class="line">    ServerAlias ymx.com</span><br><span class="line">  &lt;Directory <span class="string">"/Users/grace/ymx"</span>&gt;</span><br><span class="line">      Options Indexes FollowSymLinks ExecCGI</span><br><span class="line">      DirectoryIndex</span><br><span class="line">      AllowOverride All</span><br><span class="line">      Order allow,deny</span><br><span class="line">      Allow <span class="keyword">from</span> all</span><br><span class="line">     Require all granted</span><br><span class="line">  &lt;<span class="regexp">/Directory&gt;</span></span><br><span class="line"><span class="regexp">  #开启反向代理</span></span><br><span class="line"><span class="regexp">  ProxyRequests Off</span></span><br><span class="line"><span class="regexp">  #使用/</span>api代替http:<span class="comment">//localhost:3000，不要照搬，是啥就写啥，/api也是想叫啥就叫啥</span></span><br><span class="line">  ProxyPass /api http:<span class="comment">//localhost:3000</span></span><br><span class="line">&lt;<span class="regexp">/VirtualHost&gt;</span></span><br></pre></td></tr></table></figure>
 <h3 id="1-3-配置hosts"><a href="#1-3-配置hosts" class="headerlink" title="1.3 配置hosts"></a>1.3 配置hosts</h3><p>最后在hosts文件里添加域名IP对照，</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1   ymx.com</span><br></pre></td></tr></table></figure>
 <p>可能这三个文件会有不同的修改顺序，但是别忘了重启apache，注意在使用的时候ajax里的url参数加上/api，例如：’/api/user/login’</p>
-<h2 id="2-CORS方式"><a href="#2-CORS方式" class="headerlink" title="2.CORS方式"></a>2.CORS方式</h2>
+<h3 id="1-4-原理"><a href="#1-4-原理" class="headerlink" title="1.4 原理"></a>1.4 原理</h3><p>首先，跨域是浏览器作出的限制，使用ajax才会出现跨域，浏览器从一个域名的网页通过ajax去请求另一个域名下的资源时,域名、端口、协议这是三个有一种方式不同,都会被浏览器认为是跨域，既然跨域是浏览器作出的限制，那么我们可以让浏览器不去跨域，而是直接访问自己的Apache服务器，而Apache可以请求到localhost:3000端口的数据，此时跨域限制得以解决。这种方式，不需要前后端配合。</p>
+<p><img src="/assets/blog/20170927/proxy.png" alt="proxy"></p>
+<h2 id="2-CORS方式-需要前后端配合，官方给的方案"><a href="#2-CORS方式-需要前后端配合，官方给的方案" class="headerlink" title="2.CORS方式(需要前后端配合，官方给的方案)"></a>2.CORS方式(需要前后端配合，官方给的方案)</h2><p>其实最后发现CORS也是可以的，只是我设置的有问题，但是看起来有点麻烦。</p>
+<p>后端需要设置响应头信息</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//第一条设置以后，能解决数据访问问题，但是不能解决跨域问题</span></span><br><span class="line">res.header(<span class="string">'Access-Control-Allow-Origin'</span>,<span class="string">'www.isymx.com'</span>);</span><br><span class="line"><span class="comment">//这个可以解决cookie的限制</span></span><br><span class="line">res.header(<span class="string">'Access-Control-Allow-Credentials'</span>,<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+<p>前端在发送ajax的时候需要配置xhrFields</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">    url:<span class="string">''</span>,</span><br><span class="line">    type: <span class="string">'post'</span>,</span><br><span class="line">    xhrFields: &#123;</span><br><span class="line">        withCredentials: <span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line">    success: <span class="function"><span class="keyword">function</span>(<span class="params">info</span>)</span>&#123;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
       
 
       
