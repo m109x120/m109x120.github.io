@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/9 | Hexo</title>
+  <title>说说文件上传 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/2017/09/index.html">
+  <meta name="description" content="虽说，文件上传是一件非常常见的事情，几乎每个后台管理系统都有用到，也写了好几次，但每次写，不是这有问题就是那有问题，每次都是一顿查资料，今天详细说说文件上传，也好加深一下自己的记忆。">
+<meta name="keywords" content="ajax,文件上传,php">
+<meta property="og:type" content="article">
+<meta property="og:title" content="说说文件上传">
+<meta property="og:url" content="http://yoursite.com/2017/06/09/about-upfiles/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="虽说，文件上传是一件非常常见的事情，几乎每个后台管理系统都有用到，也写了好几次，但每次写，不是这有问题就是那有问题，每次都是一顿查资料，今天详细说说文件上传，也好加深一下自己的记忆。">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/assets/blog/20170609/authority.png">
+<meta property="og:updated_time" content="2018-10-10T12:32:52.100Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="说说文件上传">
+<meta name="twitter:description" content="虽说，文件上传是一件非常常见的事情，几乎每个后台管理系统都有用到，也写了好几次，但每次写，不是这有问题就是那有问题，每次都是一顿查资料，今天详细说说文件上传，也好加深一下自己的记忆。">
+<meta name="twitter:image" content="http://yoursite.com/assets/blog/20170609/authority.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,60 +157,205 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-about-upfiles" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/27/CORS-928-0/" class="archive-article-date">
-  	<time datetime="2017-09-27T12:08:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-27</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/27/CORS-928-0/">后端设定CORS，能访问数据接口，但是cookie，session无法冲破跨域限制</a>
+    <h1 class="article-title" itemprop="name">
+      说说文件上传
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/06/09/about-upfiles/" class="archive-article-date">
+  	<time datetime="2017-06-09T07:21:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>虽说，文件上传是一件非常常见的事情，几乎每个后台管理系统都有用到，也写了好几次，但每次写，不是这有问题就是那有问题，每次都是一顿查资料，今天详细说说文件上传，也好加深一下自己的记忆。<br><a id="more"></a></p>
+<h2 id="0-文件上传PHP部分"><a href="#0-文件上传PHP部分" class="headerlink" title="0.文件上传PHP部分"></a>0.文件上传PHP部分</h2><p>可能出现的问题：</p>
+<p>1.文件名为中文可能出现乱码，不好解决</p>
+<p>2.避免方案：设置哈希字符串（一串十六进制数据）</p>
+<p>​    优点：相同文件生成的哈希值一样，如果这个文件只有1字节内容的差异，它生成的哈希值就不一样，可以利用它唯一表示一个文件。这个可以保证服务器上不存在重复的资源。减少服务器负担。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    header(<span class="string">"Content-Type: application/json;charset=utf-8"</span>);</span><br><span class="line">    <span class="comment">//0.接收前端的文件数据，upfile是提前约定好的</span></span><br><span class="line">    $file_info = $_FILES[<span class="string">'upfile'</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">//1.获得文件后缀</span></span><br><span class="line">    $name = $file_info[<span class="string">'name'</span>];</span><br><span class="line">    $arr = explode(<span class="string">'.'</span>,$name);</span><br><span class="line">    $ext = array_pop($arr);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//2.得到hash值，</span></span><br><span class="line">    $md5_str = md5_file($file_info[<span class="string">'tmp_name'</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//3.计算保存路径，文件名，一般线上是全路径，这里只是为了测试</span></span><br><span class="line">    $save_file_name = <span class="string">"./upload/"</span> . $md5_str . <span class="string">"."</span> . $ext;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//4.移动保存</span></span><br><span class="line">    move_uploaded_file($file_info[<span class="string">'tmp_name'</span>],$save_file_name);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//5.返回给前端是否上传成功,成功返回地址，方便前端做上传预览</span></span><br><span class="line">    <span class="keyword">echo</span> json_encode(<span class="keyword">array</span>(</span><br><span class="line">        <span class="string">"success"</span> =&gt; <span class="keyword">true</span>,</span><br><span class="line">        <span class="string">"url"</span> =&gt; $save_file_name</span><br><span class="line">    ));  </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>另外，对于这门世界上最好的语言，我只是简单了解，这个只是为了测试前端的代码。就像最后我还没了解到如何判断文件是否上传成功。另外对于macOS系统的用户，别忘了开文件夹权限，否则上传不了，如图。全部改成读与写。</p>
+</blockquote>
+<p><img src="/assets/blog/20170609/authority.png" alt="authority"></p>
+<h2 id="1-原生图片上传-预览-H5"><a href="#1-原生图片上传-预览-H5" class="headerlink" title="1.原生图片上传+预览(H5)"></a>1.原生图片上传+预览(H5)</h2><blockquote>
+<p>采用H5新增的构造函数new FormData()</p>
+</blockquote>
+<p>html部分</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">""</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">h3</span>&gt;</span>请选择文件<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">name</span>=<span class="string">'upfile'</span> <span class="attr">id</span>=<span class="string">"file"</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"submit"</span>&gt;</span>上传<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">     <span class="comment">&lt;!--做上传预览--&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">""</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">id</span>=<span class="string">"img"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>js部分</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//采用ajax上传文件，像那种需要跳转的就不写了，用户体验不好，不用</span></span><br><span class="line"><span class="keyword">var</span> oForm = <span class="built_in">document</span>.querySelector(<span class="string">'form'</span>);</span><br><span class="line"><span class="keyword">var</span> oFile = <span class="built_in">document</span>.querySelector(<span class="string">'#file'</span>);</span><br><span class="line"><span class="keyword">var</span> oImg = <span class="built_in">document</span>.querySelector(<span class="string">'#img'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//实际上并不是点击表单的submit事件上传的图片，因为要做预览，</span></span><br><span class="line">oFile.onchange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//只要选择文件就预览</span></span><br><span class="line">    <span class="comment">//1.使用FormDatas收集数据(H5引入的新的构造函数)</span></span><br><span class="line">    <span class="keyword">var</span> data = <span class="keyword">new</span> FormData();</span><br><span class="line">    data.append(<span class="string">'upfile'</span>,<span class="keyword">this</span>.files[<span class="number">0</span>]);</span><br><span class="line">    <span class="comment">//2.发送post请求,</span></span><br><span class="line">    <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">    xhr.open(<span class="string">'post'</span>,<span class="string">'./upload.php'</span>);</span><br><span class="line">    xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.readyState === <span class="number">4</span> &amp;&amp; <span class="keyword">this</span>.status === <span class="number">200</span>)&#123;</span><br><span class="line">            <span class="comment">//字符串形式的json</span></span><br><span class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>.responseText);</span><br><span class="line">            <span class="keyword">var</span> obj = <span class="built_in">JSON</span>.parse(<span class="keyword">this</span>.responseText);</span><br><span class="line">            <span class="keyword">if</span>(obj.success)&#123;</span><br><span class="line">                <span class="comment">//上传成功就渲染img，预览</span></span><br><span class="line">                oImg.src = obj.url;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    xhr.send(data);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-jQuery提供的文件上传"><a href="#2-jQuery提供的文件上传" class="headerlink" title="2.jQuery提供的文件上传"></a>2.jQuery提供的文件上传</h2><blockquote>
+<p>原生js看起来（bushi）有（yi）点麻烦，jQuery给我们做了很多默认处理，做一些配置就好</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'#file'</span>).on(<span class="string">'change'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//1.使用formDate</span></span><br><span class="line">    <span class="keyword">var</span> data = <span class="keyword">new</span> FormData();</span><br><span class="line">    data.append(<span class="string">'upfile'</span>,$(<span class="keyword">this</span>).get(<span class="number">0</span>).files[<span class="number">0</span>]);</span><br><span class="line">    <span class="comment">//2.发送ajax请求</span></span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">        url: <span class="string">'./upload.php'</span>,</span><br><span class="line">        type: <span class="string">'post'</span>,</span><br><span class="line">        data: data,</span><br><span class="line">        <span class="comment">/////////需要添加的配置信息</span></span><br><span class="line">        cache: <span class="literal">false</span>,</span><br><span class="line">        contentType: <span class="literal">false</span>,</span><br><span class="line">        progressData: <span class="literal">false</span>,</span><br><span class="line">        <span class="comment">////////配置结束</span></span><br><span class="line">        success: <span class="function"><span class="keyword">function</span>(<span class="params">info</span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(info);</span><br><span class="line">            <span class="keyword">if</span>(info.success)&#123;</span><br><span class="line">                <span class="comment">//上传成功就渲染img，预览</span></span><br><span class="line">                <span class="comment">//无需转换数据格式，因为jQuery 将自动根据 HTTP 包 MIME 信息来智能判断（预期）</span></span><br><span class="line">                oImg.src = info.url;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>其实，如果是想要传多个文件，我们只需要在data里多次append就好了。其实还有很多文件上传插件😄</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>感谢支持<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">跨域</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ajax</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">文件上传</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">php</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/06/09/about-upfiles/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/06/10/centerCenter/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          子元素垂直水平居中的方式
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/01/12/hellohexo/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">搭建一个基于github和hexo的博客</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -233,8 +385,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
