@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2018/1 | Hexo</title>
+  <title>常用mySQL语句 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/2018/01/index.html">
+  <meta name="description" content="mySQL在大学里学了两遍，一个是基于运用的，上来就讲实例，一个是原理的，数据库原理概论。感觉有一整年的事件都在学这个，可见重要性，今天总结一下很常用的几个语句，加深一下印象。">
+<meta name="keywords" content="mySQL基本语句">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用mySQL语句">
+<meta property="og:url" content="http://yoursite.com/2017/01/13/mySQl/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="mySQL在大学里学了两遍，一个是基于运用的，上来就讲实例，一个是原理的，数据库原理概论。感觉有一整年的事件都在学这个，可见重要性，今天总结一下很常用的几个语句，加深一下印象。">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-10-13T11:22:04.865Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="常用mySQL语句">
+<meta name="twitter:description" content="mySQL在大学里学了两遍，一个是基于运用的，上来就讲实例，一个是原理的，数据库原理概论。感觉有一整年的事件都在学这个，可见重要性，今天总结一下很常用的几个语句，加深一下印象。">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,68 +155,240 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-mySQl" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/01/20/js-es5/" class="archive-article-date">
-  	<time datetime="2018-01-20T15:26:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-20</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/20/js-es5/">原生ES5里的一道有趣的题目</a>
+    <h1 class="article-title" itemprop="name">
+      常用mySQL语句
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/01/13/mySQl/" class="archive-article-date">
+  	<time datetime="2017-01-13T11:09:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>mySQL在大学里学了两遍，一个是基于运用的，上来就讲实例，一个是原理的，数据库原理概论。感觉有一整年的事件都在学这个，可见重要性，今天总结一下很常用的几个语句，加深一下印象。<br><a id="more"></a></p>
+<h2 id="1-数据查询"><a href="#1-数据查询" class="headerlink" title="1.数据查询"></a>1.数据查询</h2><p>语法格式    :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SELECT  字段名1, 字段名2, ......</span><br><span class="line"></span><br><span class="line">  FROM 表名	</span><br><span class="line"></span><br><span class="line">      [ WHERE &lt;条件表达式&gt; ]</span><br><span class="line"></span><br><span class="line">      [ ORDER BY &lt;字段名&gt; [ ASC|DESC ]]</span><br><span class="line"></span><br><span class="line">      [ LIMIT  START, LENGTH]</span><br></pre></td></tr></table></figure>
+<h3 id="1-1基本查询"><a href="#1-1基本查询" class="headerlink" title="1.1基本查询"></a>1.1基本查询</h3><p>语法格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select  字段名1, 字段名2,....  from  表名</span><br></pre></td></tr></table></figure>
+<p>例如:</p>
+<p>查询管理员的id，昵称</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select admin_id,admin_nickname from tab-admin</span><br></pre></td></tr></table></figure>
+<p>出于性能考虑，一般不写‘*’</p>
+<h3 id="1-2where（条件）"><a href="#1-2where（条件）" class="headerlink" title="1.2where（条件）"></a>1.2where（条件）</h3><p>查询<code>年龄在23-28</code>之间的管理员的所有信息</p>
+<p>where 可以使用条件来筛选查询出的结果，例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from tab-admin where admin_age&gt;=23 and admin_age&lt;=30</span><br></pre></td></tr></table></figure>
+<p>或者：between…and</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * where admin_age between 23 and 28</span><br></pre></td></tr></table></figure>
+<p>查询年龄<code>不在</code>23-28之间的管理员的所有信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * where admin_age&lt;23 or admin_age&gt;28</span><br></pre></td></tr></table></figure>
+<p>或者：not between and</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * where admin_age not between 23 and 28</span><br></pre></td></tr></table></figure>
+<p>注意：mysql的条件里没有不等于，可以用大于小于模拟不等于</p>
+<h3 id="1-3in（枚举）"><a href="#1-3in（枚举）" class="headerlink" title="1.3in（枚举）"></a>1.3in（枚举）</h3><p>查询年龄为20、28的女性管理员信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from tab-admin where admin_gender=&apos;女&apos;  and  （admin_age=20 or admin_age=28）</span><br></pre></td></tr></table></figure>
+<p>或者 in</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select admin_id from tab-admin where admin_gender=&apos;女&apos;  and  admin_age in（20,28）</span><br></pre></td></tr></table></figure>
+<h3 id="1-4模糊查询"><a href="#1-4模糊查询" class="headerlink" title="1.4模糊查询"></a>1.4模糊查询</h3><p>通配符:</p>
+<p>  <code>%</code> : 代表任意长度(包括0)的任意字符</p>
+<p>  <code>_</code> :  代表1位长度的任意字符</p>
+<p> <code>like</code>: 在执行模糊查询时，必须使用like来作为匹配条件</p>
+<p>查询邮箱地址中包含字符<code>sina</code>的管理员信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from tab-admin where admin_email like &apos;%sina%&apos;;</span><br></pre></td></tr></table></figure>
+<h3 id="1-5order-by-（顺序）"><a href="#1-5order-by-（顺序）" class="headerlink" title="1.5order by （顺序）"></a>1.5order by （顺序）</h3><p>order by 可以对查询结果按某个字段的升降进行排序</p>
+<p>  升序 <code>asc</code> （默认值） ，  降序 <code>desc</code></p>
+<p>可进行排序的字段通常是  整型  英文字符串型  日期型  (中文字符串也行,但一般不用)</p>
+<p>例如：查询所有管理员信息，按照id的降序查找</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from tab-admin order by admin_id desc</span><br></pre></td></tr></table></figure>
+<h3 id="1-6limit限制-可用于分页"><a href="#1-6limit限制-可用于分页" class="headerlink" title="1.6limit限制(可用于分页)"></a>1.6limit限制(可用于分页)</h3><p>limit用来限制查询结果的起始点和长度</p>
+<p> 格式:  limit  var1, var2</p>
+<p> var1: 起始点。 查询结果的索引，从0开始。 0代表第一条数据</p>
+<p> var2: 长度</p>
+<p>例如：查询年龄最大的3名男性管理员的信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from tab-admin where admin_gender=&apos;男&apos; order by admin_age desc limit 0,3;</span><br></pre></td></tr></table></figure>
+<h3 id="1-7多表查询"><a href="#1-7多表查询" class="headerlink" title="1.7多表查询"></a>1.7多表查询</h3><p>关键词: <code>join</code>  <code>on</code></p>
+<p>语法格式:  </p>
+<p>​    select  *  from  表1</p>
+<pre><code>join 表2  on  链接条件
+</code></pre><p>链接条件一定是   表1的某个字段 =  表2的某个字段</p>
+<p>例子：查询学生的全部信息，系别需要使用系名来进行显示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select tab-stu.*,tab-dept.dept_name from tab-stu join tab-dept on sdept=dept_id;</span><br></pre></td></tr></table></figure>
+<h2 id="2-添加数据"><a href="#2-添加数据" class="headerlink" title="2.添加数据"></a>2.添加数据</h2><p>格式： insert  into  表名(字段1，字段2，…)  values(值1，值2，…);</p>
+<p>关键点:</p>
+<p>   1) 字段和值需要一一对应，如果不对应会造成添加失败或者数据错误<br>   2) 如果每个字段都有数据，则不需要在表名后设置字段列表<br>   3) 带有auto_increment属性的字段可以使用null来设置，MySQL会自动填充数据</p>
+<p>例子：向student表添加一条数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into tab-stu(sno,sname,sgender,sage) values(6,&apos;Grace&apos;,&apos;女&apos;,20);</span><br></pre></td></tr></table></figure>
+<p>如果每个字段都需要设置，那么可以不列出字段名，但是顺序要有保证</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into tab-stu values(null,&apos;Grace&apos;,&apos;女&apos;,20);</span><br></pre></td></tr></table></figure>
+<p>有auto_increment属性的字段，mysql会自动填充。</p>
+<h2 id="3-修改数据"><a href="#3-修改数据" class="headerlink" title="3.修改数据"></a>3.修改数据</h2><p>语法格式:  </p>
+<pre><code>update  表名   set   字段1=值1, 字段2=值2,...  where  修改条件
+
+修改表中的哪一条（几条）数据的 字段1=值1...
+</code></pre><p>例子：将所有男性管理员的年龄都+1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update tab-admin set admin_age=admin_age+1 where admin_gender=&apos;男&apos;;</span><br></pre></td></tr></table></figure>
+<h2 id="4-删除数据"><a href="#4-删除数据" class="headerlink" title="4.删除数据"></a>4.删除数据</h2><p>语法格式:  delete from 表名  where 删除条件</p>
+<p>例子：删除id=5的管理员</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete from tab-admin where admin_id=5;</span><br></pre></td></tr></table></figure>
+<p>一般是不删除数据的，都只是在做修改，比如删除会把isdelete字段改为true，表示删除数据。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>感谢支持<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ES5</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">预解析</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">mySQL基本语句</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/01/13/mySQl/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/06/09/about-upfiles/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          说说文件上传
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/01/12/hellohexo/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">搭建一个基于github和hexo的博客</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -241,8 +418,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
