@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="总结一下基本的react语法，以及特有的jsx，组件传值，包括子组件修改父组件的数据，兄弟组件的通信，实际上也就是单向数据流的概念。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-28T04:00:49.301Z">
+<meta property="og:updated_time" content="2018-10-20T05:41:12.023Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react基本语法特征">
 <meta name="twitter:description" content="总结一下基本的react语法，以及特有的jsx，组件传值，包括子组件修改父组件的数据，兄弟组件的通信，实际上也就是单向数据流的概念。">
@@ -176,7 +176,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>总结一下基本的react语法，以及特有的jsx，组件传值，包括子组件修改父组件的数据，兄弟组件的通信，实际上也就是单向数据流的概念。<br><a id="more"></a></p>
-<h2 id="1-react的优点"><a href="#1-react的优点" class="headerlink" title="1.react的优点"></a>1.react的优点</h2><p>react本身只是一个视图层的框架，它抛弃了传统的继承模式，采用组件化的方式开发，采用了jsx表达式，jsx只有在react里才有的，用来处理数据和DOM的关系，不需要我们操作DOM，不同于art-template等之类的模版字符串，它采用虚拟DOM的方式减少低效的DOM操作。</p>
+<h2 id="1-react的优点"><a href="#1-react的优点" class="headerlink" title="1.react的优点"></a>1.react的优点</h2><p>react本身只是一个视图层的框架，它抛弃了传统的继承模式，采用组件化的方式开发，采用了jsx表达式，jsx只有在react里才有的，用来处理数据和DOM的关系，不需要我们操作DOM，我们所关心的是数据，dom也是由数据在驱动，不同于art-template等之类的模版字符串，它采用虚拟DOM的方式减少低效的DOM操作。</p>
 <h2 id="2-jsx基础语法"><a href="#2-jsx基础语法" class="headerlink" title="2.jsx基础语法"></a>2.jsx基础语法</h2><p> 基本用法，样式用法，变量的使用，逻辑的处理</p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//导入react，react-dom</span></span><br><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">'react-dom'</span>;</span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    name: <span class="string">'Grace'</span>,</span><br><span class="line">    flag: <span class="literal">true</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">let</span> arr = [<span class="string">'Apple'</span>,<span class="string">'ml'</span>,<span class="string">'oppo'</span>];</span><br><span class="line"><span class="keyword">let</span> style = &#123;</span><br><span class="line">    color:<span class="string">'r'</span>+<span class="string">'ed'</span>,</span><br><span class="line">    fontSize: <span class="number">30</span>+<span class="number">20</span>+<span class="string">'px'</span></span><br><span class="line">    <span class="comment">//虽然直接加样式的方式不常用，但它支持逻辑，</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">let</span> jsx = (</span><br><span class="line">    &lt;div style=&#123;style&#125; className=<span class="string">'jsx'</span>&gt;</span><br><span class="line">        &#123;<span class="comment">/*条件判断与变量的使用*/</span>&#125;</span><br><span class="line">        &#123;</span><br><span class="line">            obj.flag ? <span class="xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>I am &#123;obj.name&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span> : <span class="xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>I am not &#123;obj.name&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">        &#125;</span><br><span class="line">        &#123;<span class="comment">/*数组循环*/</span>&#125;</span><br><span class="line">        &#123;</span><br><span class="line">            arr.map(<span class="function">(<span class="params">name,index</span>) =&gt;</span> &lt;p key=&#123;index&#125;&gt;第&#123;index&#125;号商品:&#123;name&#125;&lt;<span class="regexp">/p&gt;)</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">);</span><br><span class="line">ReactDOM.render(</span><br><span class="line">    jsx, </span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'#app'</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 <h2 id="3-react组件（ES6）"><a href="#3-react组件（ES6）" class="headerlink" title="3.react组件（ES6）"></a>3.react组件（ES6）</h2><p>本段代码包含，数据传递，修改数据，以及事件绑定</p>
@@ -390,12 +390,6 @@
     <div id="footer-info">
     	<div class="footer-left">
 				&copy; 2018 Grace
-				<span id="busuanzi_container_site_pv">
-					总访问量: <span id="busuanzi_value_site_pv"></span>
-				</span>
-				<span id="busuanzi_container_site_uv">
-					总访客: <span id="busuanzi_value_site_uv"></span>
-				</span>
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -403,7 +397,7 @@
     </div>
 	</div>	
 </footer>
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
     </div>
     <script>
 	var yiliaConfig = {
@@ -483,11 +477,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文件上传</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">php</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">css布局</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">居中</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">清浮动</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -507,19 +517,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">循环</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">mySQL基本语句</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件上传</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">php</a>
               </li>
              
               <li class="article-tag-list-item">
