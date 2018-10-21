@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: ajax | Hexo</title>
+  <title>使用Express开发MVC应用 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/tags/ajax/index.html">
+  <meta name="description" content="后端渲染静态页是最有利于SEO的做法，经过后端渲染出的页面包含真实的数据，有利于爬虫抓取，但，牵扯到数据很多的情况下，会加重服务器的负担，服务端响应请求的速度会变慢。这里采用node的express，说说MVC开发模式。">
+<meta name="keywords" content="模块化,Express,node,MVC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Express开发MVC应用">
+<meta property="og:url" content="http://yoursite.com/2018/02/09/express-node/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="后端渲染静态页是最有利于SEO的做法，经过后端渲染出的页面包含真实的数据，有利于爬虫抓取，但，牵扯到数据很多的情况下，会加重服务器的负担，服务端响应请求的速度会变慢。这里采用node的express，说说MVC开发模式。">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-10-21T12:34:19.459Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="使用Express开发MVC应用">
+<meta name="twitter:description" content="后端渲染静态页是最有利于SEO的做法，经过后端渲染出的页面包含真实的数据，有利于爬虫抓取，但，牵扯到数据很多的情况下，会加重服务器的负担，服务端响应请求的速度会变慢。这里采用node的express，说说MVC开发模式。">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,68 +155,265 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-express-node" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/09/about-upfiles/" class="archive-article-date">
-  	<time datetime="2017-06-09T07:21:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-09</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/09/about-upfiles/">说说文件上传</a>
+    <h1 class="article-title" itemprop="name">
+      使用Express开发MVC应用
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/02/09/express-node/" class="archive-article-date">
+  	<time datetime="2018-02-09T12:20:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>后端渲染静态页是最有利于SEO的做法，经过后端渲染出的页面包含真实的数据，有利于爬虫抓取，但，牵扯到数据很多的情况下，会加重服务器的负担，服务端响应请求的速度会变慢。这里采用node的express，说说MVC开发模式。<br><a id="more"></a></p>
+<h2 id="0-起步，搭建MVC结构"><a href="#0-起步，搭建MVC结构" class="headerlink" title="0.起步，搭建MVC结构"></a>0.起步，搭建MVC结构</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 初始化 package.json 文件</span></span><br><span class="line">npm init -y</span><br><span class="line"><span class="comment"># 安装 express 到项目中</span></span><br><span class="line">npm i express</span><br></pre></td></tr></table></figure>
+<p>定义app.js为程序入口文件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 加载 Express</span></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="comment">//加载路由模块</span></span><br><span class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">'./router'</span>);</span><br><span class="line"><span class="comment">// 2. 调用 express() 得到一个 app</span></span><br><span class="line"><span class="comment">//类似于 http.createServer()</span></span><br><span class="line"><span class="keyword">const</span> app = express();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.挂载路由，</span></span><br><span class="line">app.use(router);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4. 监听端口号，启动 Web 服务</span></span><br><span class="line">app.listen(<span class="number">3000</span>, () =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'server is runing on localhost:3000'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>路由模块rooter.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="comment">//导入来自控制器的方法；假如说来自控制器的用户模块</span></span><br><span class="line"><span class="keyword">const</span> c_user = <span class="built_in">require</span>(<span class="string">'./controllers/c_user'</span>);</span><br><span class="line"><span class="keyword">const</span> router = express.Router();</span><br><span class="line"></span><br><span class="line"><span class="comment">//router的回调函数会被独立到controllers/c_user模块（控制器模块中）</span></span><br><span class="line">router.get(<span class="string">'/'</span>,  c_user.handelLogin);</span><br><span class="line"></span><br><span class="line"><span class="comment">//将路由模块导出</span></span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure>
+<p>控制器模块controllers/c_user.js（以处理用户登录为例，数据库处理的模块要放在model层）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//导入来之model层的数据库方法</span></span><br><span class="line"><span class="keyword">const</span> m_user = <span class="built_in">require</span>(<span class="string">'../models/m_user'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports.handelLogin = <span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="comment">//获取前端表单发来的数据，这个需要配置app.js,这个body是一个对象，有的时候数据库里的字段不一定都来自表单，有可能要手动添加</span></span><br><span class="line">    <span class="keyword">const</span> body = req.body;</span><br><span class="line">    <span class="comment">// 调用model层方法 得到数据库操作的方法</span></span><br><span class="line">    m_user.checkEmail(body,(err,data)=&gt;&#123;</span><br><span class="line">        <span class="keyword">if</span>(err)&#123;</span><br><span class="line">            <span class="comment">//其实错误处理，以及错误界面这种最后都会在中间件中处理</span></span><br><span class="line">            <span class="keyword">return</span> res.send(&#123;</span><br><span class="line">                code:<span class="number">500</span>,</span><br><span class="line">                msg:<span class="string">'服务端发生错误'</span></span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        .</span><br><span class="line">        .</span><br><span class="line">        .</span><br><span class="line">        <span class="comment">//将当前登录成功的用户所有信息都种到session中</span></span><br><span class="line">        req.session.user = data[<span class="number">0</span>];</span><br><span class="line">        <span class="comment">//session的清除也很简单</span></span><br><span class="line">        <span class="comment">//delete req.session.user;</span></span><br><span class="line">        <span class="comment">//后端重定向</span></span><br><span class="line">        res.redirect(<span class="string">'/'</span>);</span><br><span class="line">        res.send(&#123;</span><br><span class="line">            code:<span class="number">200</span>,</span><br><span class="line">            msg:<span class="string">'登录成功'</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="0-1-const-body-req-body"><a href="#0-1-const-body-req-body" class="headerlink" title="0.1:const body = req.body"></a>0.1:const body = req.body</h3><p>能直接获取到前端发来的数据？这真不是有一点便利</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//先安装bodyParser</span></span><br><span class="line"><span class="comment">//在程序入口app.js中配置bodyParsesr</span></span><br><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">'body-parser'</span>);</span><br><span class="line">app.use(bodyParser.urlencoded(&#123;</span><br><span class="line">    extended:<span class="literal">false</span></span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure>
+<p>这个req.body是非常好用的。比如说数据库添加，验证数据成功之后，可以使用如下方式进行数据库添加</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sql = <span class="string">`INSERT INTO users SET ?`</span>;</span><br><span class="line">db.query(sql,req.body,(err,data)=&gt;&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        <span class="keyword">return</span> callback(err,<span class="literal">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    callback(<span class="literal">null</span>,data);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="0-2-回调函数"><a href="#0-2-回调函数" class="headerlink" title="0.2:回调函数"></a>0.2:回调函数</h3><p>获取model层数据库操作得到的数据（以查询用户表为例）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//导入数据库的有关配置信息，配置信息独立到一个模块中tools/db.js模块</span></span><br><span class="line"><span class="keyword">const</span> db = <span class="built_in">require</span>(<span class="string">'../tools/db_config'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports.getAllTopics = <span class="function"><span class="keyword">function</span>(<span class="params">callback</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> sql = <span class="string">'SELECT * FROM `users`'</span>;</span><br><span class="line">    db.query(sql,(err,data)=&gt;&#123;</span><br><span class="line">        <span class="keyword">if</span>(err)&#123;</span><br><span class="line">            <span class="keyword">return</span> callback(err,<span class="literal">null</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        callback(<span class="literal">null</span>,data);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>其实，一开始的时候就遇见一个bug，就是我们正常关闭数据库，会报错，Cannot enqueue Handshake after invoking quit.这是因为数据库操作是异步的，也就是js执行到query时，并不会执行query，而是先执行关闭，再去执行sql语句，会报错，最后会把连接方式改为链接池的方式进行连接。</p>
+</blockquote>
+<p>先看看mysql的配置信息（tools/db.js）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//安装mysql</span></span><br><span class="line"><span class="comment">//mysql的配置，只在db模块导入</span></span><br><span class="line"><span class="keyword">const</span> mysql = <span class="built_in">require</span>(<span class="string">'mysql'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> db = mysql.createConnection(&#123;</span><br><span class="line">    host: <span class="string">'localhost'</span>, <span class="comment">// 要连接的主机名</span></span><br><span class="line">    user: <span class="string">'root'</span>, <span class="comment">// 要连接的数据库的用户名</span></span><br><span class="line">    password: <span class="string">'pwd'</span>, <span class="comment">// 数据库密码</span></span><br><span class="line">    database: <span class="string">'dbName'</span> <span class="comment">// 数据库</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = db;</span><br></pre></td></tr></table></figure>
+<p>看到这种回调函数获取异步结果的用处，就不免想起jsonp的牛掰机制。下回总结一下jsonp的原理。</p>
+<h3 id="0-3-有关session会话机制"><a href="#0-3-有关session会话机制" class="headerlink" title="0.3:有关session会话机制"></a>0.3:有关session会话机制</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//安装express-session</span></span><br><span class="line"><span class="keyword">const</span> session = <span class="built_in">require</span>(<span class="string">'express-session'</span>);</span><br><span class="line"><span class="comment">//配置session</span></span><br><span class="line"><span class="comment">//配置session</span></span><br><span class="line">app.use(session(&#123;</span><br><span class="line">    secret: <span class="string">'keyboard cat'</span>,</span><br><span class="line">  	resave: <span class="literal">false</span>,</span><br><span class="line">  	saveUninitialized: <span class="literal">true</span>,</span><br><span class="line">  	cookie: &#123; <span class="attr">secure</span>: <span class="literal">true</span> &#125;</span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure>
+<p>其实这种方式并不是持久化保存的。每次重启服务器，都需要重新登录。</p>
+<p>express-mysql-session:把express-session保存的信息保存到数据库里（配置看官方<a href="https://github.com/chill117/express-mysql-session）" target="_blank" rel="noopener">https://github.com/chill117/express-mysql-session）</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#安装</span></span><br><span class="line">$ npm i express-mysql-session</span><br></pre></td></tr></table></figure>
+<h2 id="1-静态界面渲染"><a href="#1-静态界面渲染" class="headerlink" title="1.静态界面渲染"></a>1.静态界面渲染</h2><blockquote>
+<p>起步模块，也就大致搭建好了MVC的结构，说到这里你或许还没看到如何处理静态资源的</p>
+</blockquote>
+<p>安装express-art-template，这就是art-template比较厉害的地方了，不仅支持前端渲染，还支持后端渲染，不得不说的是，使用art-template进行前端渲染我们查看网页源代码是看不到数据的，都是双花括号之类的字符串，数据都是通过请求得到的，这样非常不利于SEO。</p>
+<p>安装，express-art-template依赖art-template所以安装两个</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install  art-template express-art-template</span><br></pre></td></tr></table></figure>
+<p>配置与使用在app.js模块</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 1. 导包</span><br><span class="line">const artTemplate = require(<span class="string">'art-template'</span>);</span><br><span class="line"></span><br><span class="line">const app = express();</span><br><span class="line">app.engine(<span class="string">'html'</span>, require(<span class="string">'express-art-template'</span>));</span><br></pre></td></tr></table></figure>
+<h3 id="1-1art-template使用"><a href="#1-1art-template使用" class="headerlink" title="1.1art-template使用"></a>1.1art-template使用</h3><blockquote>
+<p>art-template算是经常使用，但是每次用到都会去文档看看，年龄大了，脑子都不好使，记不住。。。</p>
+</blockquote>
+<h4 id="1-1-1循环"><a href="#1-1-1循环" class="headerlink" title="1.1.1循环"></a>1.1.1循环</h4><p>模板传入的数据<code>必须</code>是json对象，注意数据库里得到的是数组，需要包一层json格式。假定是：{‘list’:arr}</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;each list&#125;&#125;</span><br><span class="line">	...</span><br><span class="line">    &#123;&#123;$value.name&#125;&#125;</span><br><span class="line">    ...</span><br><span class="line">&#123;&#123;/each list&#125;&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="1-1-2判断"><a href="#1-1-2判断" class="headerlink" title="1.1.2判断"></a>1.1.2判断</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;<span class="keyword">if</span> list.length==<span class="number">0</span>&#125;&#125;</span><br><span class="line"> 	没有数据</span><br><span class="line">&#123;&#123;<span class="keyword">else</span>&#125;&#125;</span><br><span class="line"> 	&#123;&#123;each list&#125;&#125;</span><br><span class="line"> 		...</span><br><span class="line">        &#123;&#123;$value.name&#125;&#125;</span><br><span class="line">        ...</span><br><span class="line"> 	&#123;&#123;/each&#125;&#125;</span><br><span class="line">&#123;&#123;/<span class="keyword">if</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>前端调用函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> str = template(<span class="string">'id'</span>,&#123;<span class="string">'list'</span>:arr&#125;);</span><br></pre></td></tr></table></figure>
+<p>后端调用函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> res.render(<span class="string">'index.html'</span>,&#123;<span class="string">'list'</span>:data&#125;);</span><br><span class="line"><span class="comment">//index.html是views下的视图层文件，我们安装配置完express-art-templates之后res就有了这个方法</span></span><br><span class="line"><span class="comment">//而且这个方法很牛掰，直接返给浏览器渲染</span></span><br></pre></td></tr></table></figure>
+<h3 id="1-2-静态外链文件的处理"><a href="#1-2-静态外链文件的处理" class="headerlink" title="1.2.静态外链文件的处理"></a>1.2.静态外链文件的处理</h3><blockquote>
+<p>我们要给views下的html页面添加css，js，图片等静态资源，新建public文件夹, 里面存放资源文件,如css文件、图片素材等。</p>
+<p>然后在index.html中通过link引入 css文件, 发现加载不到, 浏览器控制台报404</p>
+<p>如何解决这个问题呢?  因为：任何请求都要通过配置路由的方式去处理，但其实路由转发或许是个方案，但是，资源太多处理起来就会很麻烦，所以，直接采用开放静态资源的方法。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//公开/public下的所有静态资源</span></span><br><span class="line">app.use(<span class="string">'/public'</span>, express.static(<span class="string">'./public/'</span>));</span><br><span class="line"><span class="comment">// 开放项目中要使用的第三方包</span></span><br><span class="line">app.use(<span class="string">'/node_modules'</span>, express.static(<span class="string">'./node_modules/'</span>));</span><br></pre></td></tr></table></figure>
+<p>接下来我们可以直接在静态资源文件里引入开放出来的静态资源了</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 使用静态外链资源 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"../public/main.css"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 使用第三方包中的资源 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"/node_modules/jquery/dist/jquery.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--使用自己公开的静态js资源--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"/public/index.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>。其实在接触node之前，有人告诉我，node就像小麦收割机，可以突突突地收麦子，而其他就像镰刀。接触过之后觉得，node是造收割机比较便利，零件都好了，直接拿来组装就好。前端学node最大的优势可能就是熟悉JS语法吧。不过由于后台业务逻辑复杂性，怎么写看起来都像翔。</p>
+</blockquote>
+<h3 id="1-3时间"><a href="#1-3时间" class="headerlink" title="1.3时间"></a>1.3时间</h3><p>安装处理时间的包,前后端都能使用（moment.js.com）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install moment</span><br></pre></td></tr></table></figure>
+<p>配置看官方文档</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> moment = <span class="built_in">require</span>(<span class="string">'moment'</span>);</span><br><span class="line">body.createAt = moment().format();</span><br></pre></td></tr></table></figure>
+<h2 id="2-动态路由"><a href="#2-动态路由" class="headerlink" title="2.动态路由"></a>2.动态路由</h2><p>在html中</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">'/topic/&#123;&#123;$value.id&#125;&#125;'</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>路由router.js模块中接收参数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">router.get(<span class="string">'/topic/:topicId'</span>);</span><br></pre></td></tr></table></figure>
+<p>控制器中获取参数，前端获取还需要截取，存储，这个方法真的神清气爽，非常好用。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">req.params;<span class="comment">//这直接就是&#123;topicId:***&#125;</span></span><br></pre></td></tr></table></figure>
+<p>根据当前的动态路由携带参数，渲染界面。</p>
+<h2 id="3-中间件"><a href="#3-中间件" class="headerlink" title="3.中间件"></a>3.中间件</h2><p>使用中间件可以<code>统一</code>对路由进行处理，第一个参数不写，代表不限定请求标识。例如，我们每个界面都要判断用户是否登录，使用中间件就非常的方便。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//所有路由都会匹配到这里</span></span><br><span class="line">app.use(<span class="function">(<span class="params">req,res,next</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`请求方式：<span class="subst">$&#123;req.method&#125;</span>,请求地址是：<span class="subst">$&#123;req.url&#125;</span>`</span>);</span><br><span class="line">    <span class="comment">//继续匹配下一个可以匹配到的中间件</span></span><br><span class="line">    next();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>实际上我们只是在app.js配置express-session但是在很多地方都可以使用啦，这底层就是运用了中间件的原理。</p>
+<p>中间件使用例子：</p>
+<p>404错误界面</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 当前面没有任何一个中间件能处理该请求时,则会进入到下面的这个中间件</span></span><br><span class="line"><span class="comment">// 写在挂载路由之后</span></span><br><span class="line"><span class="comment">// 不关心请求标识和请求方法</span></span><br><span class="line">app.use(<span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">    res.render(<span class="string">"404.html"</span>);</span><br><span class="line">    <span class="comment">//这个是全局的，下一个能匹配到的中间件就能访问req.currentUser。</span></span><br><span class="line">    req.currentUser = req.session.user;<span class="comment">//如此以来就可以做登录处理了，</span></span><br><span class="line">    <span class="comment">//调用next（）就是在调用下一个能匹配的中间件</span></span><br><span class="line">    <span class="comment">//如果next()传了参数，会自动调用下一个处理函数有四个参数的中间件</span></span><br><span class="line">    <span class="comment">//next的参数是err对象</span></span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="built_in">JSON</span>.parse(<span class="string">'asdf'</span>);</span><br><span class="line">        &#125;<span class="keyword">catch</span>(err)&#123;</span><br><span class="line">            <span class="comment">//利用try函数时图捕获一个错误</span></span><br><span class="line">            next(err);</span><br><span class="line">		&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>统一错误处理</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误处理的中间件: 有4个参数</span></span><br><span class="line"><span class="comment">// 如果其他中间件调用了next(err) 就会来到下面的这个中间件</span></span><br><span class="line">app.use(<span class="function">(<span class="params">err, req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">    res.send(&#123;</span><br><span class="line">        code: <span class="number">500</span>,</span><br><span class="line">        message: err.message</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>中间件封装实现(以公开静态资源为例)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//你会发现app.use的参数是一个函数，我们封装的函数也是需要返回一个函数的，</span></span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">pubStatic</span>(<span class="params">staticUrl</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">    	(req,res,next)=&gt;&#123;</span><br><span class="line">	    <span class="keyword">const</span> filepath = staticUrl + req.path;</span><br><span class="line"></span><br><span class="line">	    fs.readFile(filepath,<span class="string">'utf8'</span>,(err,data)=&gt;&#123;</span><br><span class="line">	        <span class="keyword">if</span>(err)&#123;</span><br><span class="line">	            <span class="keyword">throw</span> err;</span><br><span class="line">	        &#125;</span><br><span class="line">	        res.send(data);</span><br><span class="line">	    &#125;</span><br><span class="line">    );</span><br><span class="line">&#125;                        </span><br><span class="line">app.use(pubStatic(<span class="string">'./public'</span>));</span><br><span class="line">app.get(<span class="string">'/main.css'</span>,(err,data)=&gt;&#123;</span><br><span class="line">    </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="4-MVC"><a href="#4-MVC" class="headerlink" title="4.MVC"></a>4.MVC</h2><p>代码之间模块划分比较清晰，虽然它不能提高代码的执行效率，但是，它使得工程化的代码变得很清晰，利于维护。不同模块,<strong>各司其职</strong></p>
+<p><strong>M</strong>-Model-模型-专门处理<strong>数据库操作</strong> </p>
+<p><strong>V</strong>-View-视图-专门<strong>处理视图</strong> </p>
+<p><strong>C</strong>-Controller-控制器-<strong>宏观调度</strong></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>感谢支持<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ajax</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">模块化</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">文件上传</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Express</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">php</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">node</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">MVC</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/02/09/express-node/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2018/03/18/reactProductEnvironment/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          react开发打包环境的搭建
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2018/01/20/js-es5/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">原生ES5里的一道有趣的题目</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -235,9 +437,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
