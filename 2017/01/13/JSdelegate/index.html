@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: mySQL基本语句 | Hexo</title>
+  <title>JS事件委托 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/tags/mySQL基本语句/index.html">
+  <meta name="description" content="前几天用到了原生JS的事件委托，觉得对提高dom操作效率还是重要的，闲暇之余，就来念叨一下JS事件委托。">
+<meta name="keywords" content="事件注册,事件流,事件委托">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS事件委托">
+<meta property="og:url" content="http://yoursite.com/2017/01/13/JSdelegate/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前几天用到了原生JS的事件委托，觉得对提高dom操作效率还是重要的，闲暇之余，就来念叨一下JS事件委托。">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-10-22T05:41:55.173Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="JS事件委托">
+<meta name="twitter:description" content="前几天用到了原生JS的事件委托，觉得对提高dom操作效率还是重要的，闲暇之余，就来念叨一下JS事件委托。">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,60 +155,248 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-JSdelegate" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/13/mySQl/" class="archive-article-date">
-  	<time datetime="2017-01-13T11:09:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-13</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/13/mySQl/">常用mySQL语句</a>
+    <h1 class="article-title" itemprop="name">
+      JS事件委托
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/01/13/JSdelegate/" class="archive-article-date">
+  	<time datetime="2017-01-13T05:39:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前几天用到了原生JS的事件委托，觉得对提高dom操作效率还是重要的，闲暇之余，就来念叨一下JS事件委托。<br><a id="more"></a></p>
+<h2 id="1-事件注册与移除"><a href="#1-事件注册与移除" class="headerlink" title="1.事件注册与移除"></a>1.事件注册与移除</h2><h3 id="1-1on-事件名称"><a href="#1-1on-事件名称" class="headerlink" title="1.1on+事件名称"></a>1.1on+事件名称</h3><blockquote>
+<p>这种方式几乎所有的浏览器都支持。</p>
+</blockquote>
+<p>注册事件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">box.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">//事件处理程序	</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>移除事件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">box.onclick = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这种注册方式会出现覆盖，就这一个致命缺点，导致工程中不用。差不多可以直接下岗了。</p>
+</blockquote>
+<h3 id="1-2-addEventListener"><a href="#1-2-addEventListener" class="headerlink" title="1.2 addEventListener"></a>1.2 addEventListener</h3><blockquote>
+<p>是现代浏览器支持的新的事件注册方式，不会覆盖事件</p>
+</blockquote>
+<p>语法：useCapture默认是false</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">元素.addEventListener(<span class="string">'click'</span>, func, useCapture);</span><br></pre></td></tr></table></figure>
+<p>注意：如果想要让你注册的事件能够移除，不能使用匿名函数。</p>
+<p>移除：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">removeEventListener(<span class="string">'click'</span>, func, useCapture);</span><br></pre></td></tr></table></figure>
+<p>关于事件绑定的兼容性</p>
+<blockquote>
+<p>想必兼容性问题会是一件令人头疼的事情，但是我觉得，一个工程师的思维应该是工程性的，不会因为代码的复杂，或者兼容性而头疼，因为这是本职。</p>
+</blockquote>
+<p>IE678不支持以上两种，但是它特立独行地提出了自己的方法attachEvent与detachEvent</p>
+<p>attachEvent:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">attachEvent(<span class="string">'onclick'</span>, func)</span><br></pre></td></tr></table></figure>
+<p>detachEvent的用法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">detachEvent(<span class="string">'onclick'</span>, func)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>你会清楚地看到，人家压根没有第三个参数。低版本IE是默认没有捕获的概念的</p>
+</blockquote>
+<h3 id="1-3jQuery的事件绑定"><a href="#1-3jQuery的事件绑定" class="headerlink" title="1.3jQuery的事件绑定"></a>1.3jQuery的事件绑定</h3><blockquote>
+<p>jQuery提供了多种事件绑定的方式，只说最常用的</p>
+</blockquote>
+<p>on绑定</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'#box'</span>).on(<span class="string">'click mouseover'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'这是事件'</span>);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//多个事件的添加，对应不同方法</span></span><br><span class="line">$(<span class="string">'#box'</span>).on(&#123;</span><br><span class="line">    click : <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'这是点击事件'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    mouseover : <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'这是移入事件'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>off移除</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//事件移除</span></span><br><span class="line">off（）</span><br><span class="line"><span class="comment">//不传入参数，移除所有事件</span></span><br><span class="line">$(<span class="string">'#box).off()</span></span><br><span class="line"><span class="string">//传入事件类型名称，</span></span><br><span class="line">$('#box).off('click');</span><br><span class="line"><span class="comment">//也可以指定事件以及事件对应的方法</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-事件流"><a href="#2-事件流" class="headerlink" title="2.事件流"></a>2.事件流</h2><h3 id="2-1事件冒泡"><a href="#2-1事件冒泡" class="headerlink" title="2.1事件冒泡"></a>2.1事件冒泡</h3><blockquote>
+<p>当一个元素的事件被触发时，同样的事件将会在该元素的所有祖先元素中依次被触发。这一过程被称为事件冒泡。</p>
+</blockquote>
+<p>如果当事件冒泡给我们带来影响的时候，我们需要阻止事件冒泡。这个方式只阻止冒泡</p>
+<p>现代高版本浏览器</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">event = ev||<span class="built_in">window</span>.event;</span><br><span class="line">event.stopPropagation();</span><br></pre></td></tr></table></figure>
+<p>低版本IE</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.event.cancleBubble();</span><br></pre></td></tr></table></figure>
+<p>在Jquery中return false,既可以阻止默认事件也能阻止冒泡</p>
+<h3 id="2-2事件捕获"><a href="#2-2事件捕获" class="headerlink" title="2.2事件捕获"></a>2.2事件捕获</h3><blockquote>
+<p>相对比较鸡肋了，IE678不支持事件捕获（基本上，我们都是用利用事件冒泡）</p>
+</blockquote>
+<p>事件的处理将从DOM层次的根开始，而不是从触发事件的目标元素开始，事件被从目标元素的所有祖先元素依次往下传递</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//当addEventListener第三个参数为true时，表示事件捕获</span></span><br><span class="line">arr[i].addEventListener(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">&#125;,<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="2-3事件的三个阶段"><a href="#2-3事件的三个阶段" class="headerlink" title="2.3事件的三个阶段"></a>2.3事件的三个阶段</h3><blockquote>
+<p>1.事件的捕获-&gt;2.事件的目标阶段-&gt;3.事件的冒泡阶段</p>
+</blockquote>
+<p>这三个阶段，我们只能干预其中一个，通常来说，我们可能会在事件冒泡上做文章，而不去管事件捕获。</p>
+<h2 id="3-事件委托"><a href="#3-事件委托" class="headerlink" title="3 事件委托"></a>3 事件委托</h2><h3 id="3-1概念"><a href="#3-1概念" class="headerlink" title="3.1概念"></a>3.1概念</h3><blockquote>
+<p>事件委托就是本该自己执行的事件，让他的祖先元素代为执行。他利用了事件冒泡的机制。</p>
+</blockquote>
+<h3 id="3-2优点"><a href="#3-2优点" class="headerlink" title="3.2优点"></a>3.2优点</h3><blockquote>
+<p>减少了低效的DOM操作，给一个元素绑定事件，可以由多个元素触发事件，并且新添加的元素也能触发</p>
+</blockquote>
+<h3 id="3-2语法方式"><a href="#3-2语法方式" class="headerlink" title="3.2语法方式"></a>3.2语法方式</h3><p>原生JS，需要判定目标元素的类型</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">el.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> target = e.target || e.srcElement;</span><br><span class="line">    <span class="keyword">if</span> (target.className===<span class="string">'test'</span>) &#123;               								           </span><br><span class="line">        alert(<span class="string">'this is a element named test'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>jQuery方式，第二个参数直接指定元素的类型</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//事件委托</span></span><br><span class="line">$(<span class="string">'#box'</span>).on(<span class="string">'click'</span>, <span class="string">'p'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//绑定在#box上触发在p身上</span></span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">'这是内部的p标签'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>感谢支持<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">mySQL基本语句</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">事件注册</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">事件流</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">事件委托</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/01/13/JSdelegate/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/01/13/mySQl/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          常用mySQL语句
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/01/12/hellohexo/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">搭建一个基于github和hexo的博客</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -227,9 +420,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

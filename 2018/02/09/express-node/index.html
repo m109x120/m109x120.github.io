@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="后端渲染静态页是最有利于SEO的做法，经过后端渲染出的页面包含真实的数据，有利于爬虫抓取，但，牵扯到数据很多的情况下，会加重服务器的负担，服务端响应请求的速度会变慢。这里采用node的express，说说MVC开发模式。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-21T12:34:19.459Z">
+<meta property="og:updated_time" content="2018-10-21T14:37:18.438Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Express开发MVC应用">
 <meta name="twitter:description" content="后端渲染静态页是最有利于SEO的做法，经过后端渲染出的页面包含真实的数据，有利于爬虫抓取，但，牵扯到数据很多的情况下，会加重服务器的负担，服务端响应请求的速度会变慢。这里采用node的express，说说MVC开发模式。">
@@ -243,8 +243,10 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//所有路由都会匹配到这里</span></span><br><span class="line">app.use(<span class="function">(<span class="params">req,res,next</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`请求方式：<span class="subst">$&#123;req.method&#125;</span>,请求地址是：<span class="subst">$&#123;req.url&#125;</span>`</span>);</span><br><span class="line">    <span class="comment">//继续匹配下一个可以匹配到的中间件</span></span><br><span class="line">    next();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>实际上我们只是在app.js配置express-session但是在很多地方都可以使用啦，这底层就是运用了中间件的原理。</p>
 <p>中间件使用例子：</p>
-<p>404错误界面</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 当前面没有任何一个中间件能处理该请求时,则会进入到下面的这个中间件</span></span><br><span class="line"><span class="comment">// 写在挂载路由之后</span></span><br><span class="line"><span class="comment">// 不关心请求标识和请求方法</span></span><br><span class="line">app.use(<span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">    res.render(<span class="string">"404.html"</span>);</span><br><span class="line">    <span class="comment">//这个是全局的，下一个能匹配到的中间件就能访问req.currentUser。</span></span><br><span class="line">    req.currentUser = req.session.user;<span class="comment">//如此以来就可以做登录处理了，</span></span><br><span class="line">    <span class="comment">//调用next（）就是在调用下一个能匹配的中间件</span></span><br><span class="line">    <span class="comment">//如果next()传了参数，会自动调用下一个处理函数有四个参数的中间件</span></span><br><span class="line">    <span class="comment">//next的参数是err对象</span></span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="built_in">JSON</span>.parse(<span class="string">'asdf'</span>);</span><br><span class="line">        &#125;<span class="keyword">catch</span>(err)&#123;</span><br><span class="line">            <span class="comment">//利用try函数时图捕获一个错误</span></span><br><span class="line">            next(err);</span><br><span class="line">		&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>登录验证，在挂载路由之前，配置session之后，</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用中间件获取当前登录的用户信息,任意请求都能进来</span></span><br><span class="line">app.use(<span class="function">(<span class="params">req,res,next</span>)=&gt;</span>&#123;</span><br><span class="line">	req.locals.userInfo = req.session.user;</span><br><span class="line">    <span class="comment">//如此以来就可以做登录处理了，可以在模版引擎里直接使用userInfo了</span></span><br><span class="line">	next();</span><br><span class="line">    <span class="comment">//next不写全部都被拦截到这里了</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>404错误界面，挂载路由之后</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 当前面没有任何一个中间件能处理该请求时,则会进入到下面的这个中间件</span></span><br><span class="line"><span class="comment">// 不关心请求标识和请求方法</span></span><br><span class="line">app.use(<span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">    res.render(<span class="string">"404.html"</span>);</span><br><span class="line">    <span class="comment">//调用next（）就是在调用下一个能匹配的中间件</span></span><br><span class="line">    <span class="comment">//如果next()传了参数，会自动调用下一个处理函数有四个参数的中间件</span></span><br><span class="line">    <span class="comment">//next的参数是err对象</span></span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="built_in">JSON</span>.parse(<span class="string">'asdf'</span>);</span><br><span class="line">    &#125;<span class="keyword">catch</span>(err)&#123;</span><br><span class="line">        <span class="comment">//利用try函数时图捕获一个错误</span></span><br><span class="line">        next(err);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>统一错误处理</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误处理的中间件: 有4个参数</span></span><br><span class="line"><span class="comment">// 如果其他中间件调用了next(err) 就会来到下面的这个中间件</span></span><br><span class="line">app.use(<span class="function">(<span class="params">err, req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">    res.send(&#123;</span><br><span class="line">        code: <span class="number">500</span>,</span><br><span class="line">        message: err.message</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>中间件封装实现(以公开静态资源为例)</p>
@@ -507,7 +509,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">事件注册</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">事件流</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">事件委托</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">跨域</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">css布局</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">居中</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -523,31 +545,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">css布局</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">居中</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">清浮动</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">模块化</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">MVC</a>
+                <a href="javascript:void(0)" class="js-tag color3">循环</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -567,11 +565,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">循环</a>
+                <a href="javascript:void(0)" class="js-tag color4">清浮动</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">mySQL基本语句</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">模块化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Express</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">MVC</a>
               </li>
              
               <li class="article-tag-list-item">
